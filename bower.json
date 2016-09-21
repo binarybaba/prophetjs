@@ -1,0 +1,32 @@
+{
+  "name": "prophetjs",
+  "homepage": "https://github.com/binarybaba/prophetjs",
+  "authors": [
+    "Amin Mohamed Ajani <me@allrightamin.xyz>"
+  ],
+  "description": "A dependency free javascript library for notifications on your webpage",
+  "main": "",
+  "keywords": [
+    "notification",
+    "notifications",
+    "notify",
+    "jQuery",
+    "javascript",
+    "js",
+    "snarl",
+    "success",
+    "error",
+    "notify",
+    "alerts",
+    "alertify"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/lib",
+    "test",
+    "tests"
+  ]
+}
