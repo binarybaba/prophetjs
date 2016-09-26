@@ -1,0 +1,33 @@
+{
+  "name": "prophetjs",
+  "version": "1.0.0",
+  "description": "A very very lean dependency free library to display web notifications",
+  "main": "def.js",
+  "dependencies": {
+    "typescript": "^2.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/binarybaba/prophetjs.git"
+  },
+  "keywords": [
+    "notification",
+    "alert",
+    "alertify",
+    "jquery",
+    "notifications",
+    "notify",
+    "user",
+    "snarl"
+  ],
+  "author": "Amin Mohamed Ajani",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/binarybaba/prophetjs/issues"
+  },
+  "homepage": "https://github.com/binarybaba/prophetjs#readme"
+}
