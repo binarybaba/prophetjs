@@ -24,7 +24,7 @@
 
 .prophet.message span#message{
     background-color: #37474f;
-    color: #eeeeee;
+    color: #ECEFF1;
     z-index: 99;
     cursor: pointer;
     border-radius: 2px;
