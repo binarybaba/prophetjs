@@ -2,12 +2,16 @@
 if (!Date.now) { Date.now = function now() { return new Date().getTime(); }; }
 
 class Message {
-    message : string;
     id : number;
-    constructor(msg : string, id : number, ...rest){
-        this.message = msg;
+    message : string;
+    type: string;
+    constructor(message, id){
+        this.message = message;
         this.id = id ? id : Message.idGen();
-        console.log(rest);
+        //TODO: make stack of notifications and remove them
+        var elem = document.getElementById('message');
+        
+        elem.innerText = this.message;
         return this;
     }
     static idGen(){
@@ -26,3 +30,4 @@ class Message {
         cb();
     }
 }
+

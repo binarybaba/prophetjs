@@ -3,14 +3,12 @@ if (!Date.now) {
     Date.now = function now() { return new Date().getTime(); };
 }
 var Message = (function () {
-    function Message(msg, id) {
-        var rest = [];
-        for (var _i = 2; _i < arguments.length; _i++) {
-            rest[_i - 2] = arguments[_i];
-        }
-        this.message = msg;
+    function Message(message, id) {
+        this.message = message;
         this.id = id ? id : Message.idGen();
-        console.log(rest);
+        //TODO: make stack of notifications and remove them
+        var elem = document.getElementById('message');
+        elem.innerText = this.message;
         return this;
     }
     Message.idGen = function () {
