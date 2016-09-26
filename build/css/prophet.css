@@ -1,38 +1,47 @@
 @import 'https://fonts.googleapis.com/css?family=Assistant';
 
-.prophet.wrapper{
-    width:80%;
-    height:40px;
-    /*border:1px solid black;*/
+#prophet{
     position: fixed;
-}
-.prophet.message{
-    display: inline-block;
-    position: relative;
+    /*display: inline-block;*/
     font-family: 'Assistant', sans-serif;
+    margin-left:60%; /*Todo: Custom Control*/
+
 }
 /*Colour codes*/
-.prophet.message span#message.success{
+#prophet > li.message.success{
     background-color: #43a047;
     color:#eee;
 }
 
-.prophet.message span#message.error{
+#prophet > li.message.error{
     background-color: #d32f2f;
     color:#eee;
 }
 
-.prophet.message span#message{
-    opacity: 0.1;
-    background-color: #37474f;
-    color: #ECEFF1;
+#prophet > li.message{
+    font-family: 'Assistant', sans-serif;
+    opacity:0;
+    background-color: #37474f; /*Todo: Custom Control*/
+    color: #ECEFF1; /*Todo: Custom Control*/
     z-index: 99;
+    margin-top: 20px;
     cursor: pointer;
     border-radius: 2px;
     padding: 20px;
-    display: inline-block;
     vertical-align: middle;
     max-width: 200px;
     text-align: center;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
 }
-
+#prophet > li.message.active{
+    min-width: 200px;
+    margin-top:10px;
+    opacity: 1;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
