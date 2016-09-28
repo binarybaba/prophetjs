@@ -100,7 +100,8 @@ class Message {
         @param options.id the id of the message
         @param options.duration duration of the message
         @param options.class string of custom classes
-        @param options.onClickCallback function to execute when clicked on notification
+        @param options.onCl
+        ickCallback function to execute when clicked on notification
      @param cb callback to execute after the message is auto-removed (gets overridden if onClickCallback is specified)
     */
 
