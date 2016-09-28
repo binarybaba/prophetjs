@@ -4,7 +4,7 @@
   "authors": [
     "Amin Mohamed Ajani <me@allrightamin.xyz>"
   ],
-  "description": "A very very lean dependency free javascript library for displaying notifications",
+  "description": "A highly customizable dependency free super lean library for displaying notifications on web pages",
   "main": "",
   "keywords": [
     "notification",
