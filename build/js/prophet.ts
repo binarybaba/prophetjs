@@ -61,7 +61,7 @@ class Message {
         stackTrace: (): void => console.dir(Message.Stack),
         presets: () : void => console.dir(Message.stylePresets)
 
-    }
+    };
     static parent : HTMLElement = document.getElementById('prophet');
     static stylePresets = [
         { type: "default", backgroundColor: "#37474f" , color: "#ECEFF1"},
@@ -69,7 +69,6 @@ class Message {
         { type: "error", backgroundColor: "#d32f2f", color: "#EEE"}
         ];
     static config = {
-        /*TODO: set extra types and modify existing types*/
         types(newPresets) : void {
             newPresets = [].concat(newPresets);
             for(var i = 0, len = newPresets.length, current; i< len; i++){
@@ -79,7 +78,7 @@ class Message {
                 else Message.stylePresets[Message.stylePresets.length] = current;
             }
         }
-    }
+    };
     static Stack : Array<Message> = [];
     static idGen() {
         return Date.now();
@@ -93,6 +92,7 @@ class Message {
 
 
     /*Todo: list of promise-like callbacks, buttons, icons, */
+    /*Todo: Take position parameters and calculate placement via screen. and screen.height*/
     /*
     @param options Object of options
         @param options.text the text of the message
@@ -114,23 +114,24 @@ class Message {
         this._id = options.id ? options.id : Message.idGen();
         this._duration = +options.duration ? +options.duration : 4000;
         this._class = options.class ? " "+options.class : "";
-        /*this.onClickCallback = typeof(options.onClickCallback) === "function" ? options.onClickCallback : false*/
+        /*Override cb if an onclick callback is present*/
         if(typeof(options.onClickCallback) === "function"){
             this.onClickCallback = options.onClickCallback;
             if(cb) cb = options.onClickCallback;
         }
-        /*TODO: Override cb with on clickcallback and use cbFired to prevent double firing on away*/
-
         Message.Stack[Message.Stack.length] = this;
+
+
         /*Creation*/
         var notification = document.createElement('li');
         [notification.className, notification.innerText] = ["message"+ this._class, this._text];
+
         this.stylize(notification);
         notification.addEventListener('click', function(){
             notification.classList.remove('prophet-message-active');
+            Message.parent.removeChild(notification);
             if(_this.onClickCallback) _this.onClickCallback(_this._id);
             cbFired = true;
-            Message.parent.removeChild(notification);
         });
         Message.parent.appendChild(notification);
         setTimeout(function(){
@@ -151,7 +152,7 @@ class Message {
         return this;
     }
     stylize(notification){
-        notification.style
+        console.dir(notification);
     }
 
 

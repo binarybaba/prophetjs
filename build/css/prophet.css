@@ -20,11 +20,11 @@
 
 #prophet > li.message{
     list-style-type: none;
-    min-width: 200px;
+    min-width: 100px;
     font-family: 'Assistant', sans-serif;
     opacity:0;
-    background-color: #37474f; /*Todo: Custom Control*/
-    color: #ECEFF1; /*Todo: Custom Control*/
+    background-color: #323232; /*Todo: Custom Control*/
+    color: #f4f4f4; /*Todo: Custom Control*/
     z-index: 99;
     margin-top: 20px;
     cursor: pointer;

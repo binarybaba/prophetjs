@@ -55,6 +55,7 @@ interface IStylePresets extends Array<IStylePreset>{}
 * f. support for a single callback function*/
 var Message = (function () {
     /*Todo: list of promise-like callbacks, buttons, icons, */
+    /*Todo: Take position parameters and calculate placement via screen. and screen.height*/
     /*
     @param options Object of options
         @param options.text the text of the message
@@ -75,13 +76,12 @@ var Message = (function () {
         this._id = options.id ? options.id : Message.idGen();
         this._duration = +options.duration ? +options.duration : 4000;
         this._class = options.class ? " " + options.class : "";
-        /*this.onClickCallback = typeof(options.onClickCallback) === "function" ? options.onClickCallback : false*/
+        /*Override cb if an onclick callback is present*/
         if (typeof (options.onClickCallback) === "function") {
             this.onClickCallback = options.onClickCallback;
             if (cb)
                 cb = options.onClickCallback;
         }
-        /*TODO: Override cb with on clickcallback and use cbFired to prevent double firing on away*/
         Message.Stack[Message.Stack.length] = this;
         /*Creation*/
         var notification = document.createElement('li');
@@ -89,10 +89,10 @@ var Message = (function () {
         this.stylize(notification);
         notification.addEventListener('click', function () {
             notification.classList.remove('prophet-message-active');
+            Message.parent.removeChild(notification);
             if (_this.onClickCallback)
                 _this.onClickCallback(_this._id);
             cbFired = true;
-            Message.parent.removeChild(notification);
         });
         Message.parent.appendChild(notification);
         setTimeout(function () {
@@ -119,7 +119,7 @@ var Message = (function () {
         return this;
     };
     Message.prototype.stylize = function (notification) {
-        notification.style;
+        console.dir(notification);
     };
     Message.Util = {
         find: function (objArr, keyToFind) {
@@ -138,7 +138,6 @@ var Message = (function () {
         { type: "error", backgroundColor: "#d32f2f", color: "#EEE" }
     ];
     Message.config = {
-        /*TODO: set extra types and modify existing types*/
         types: function (newPresets) {
             newPresets = [].concat(newPresets);
             for (var i = 0, len = newPresets.length, current; i < len; i++) {
