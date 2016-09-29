@@ -1,3 +1,18 @@
+var calcSize = function(){
+        document.getElementById('screen-width').innerHTML = screen.width.toString();
+        document.getElementById('screen-height').innerHTML = screen.height.toString();
+        document.getElementById('screen-availWidth').innerHTML = screen.availWidth.toString();
+        document.getElementById('screen-availHeight').innerHTML = screen.availWidth.toString();
+}
+calcSize();
+
+
+Message.config.types({
+    type: "tip",
+    backgroundColor:"indianred",
+    color:"black"
+})
+
 document.getElementById('trigger').addEventListener('click', function(){
 
     new Message({
@@ -15,9 +30,7 @@ document.getElementById('trigger').addEventListener('click', function(){
     
 })
 
-Message.Dbg.presets();
 
-console.log("updating styles");
 
 /*Message.config.types([
     { type : "success", backgroundColor: "dwdw", color: "sdwdw" },

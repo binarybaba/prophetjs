@@ -12,8 +12,8 @@ This project adheres to [Semantic Versioning](http://semver.org/). This document
  - A stack of all Messages delivered by prophet
  - Support for setting new presets
  - Support for new classes to override per message
- - Support for an on click callback
- - Support for an on disappear callback
+ - Support for a callback
+ - Support for an on click callback which overrides general callback
 
 ### License
 
