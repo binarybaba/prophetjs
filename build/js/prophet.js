@@ -97,8 +97,6 @@ var Message = (function () {
         var _a;
     };
     Message.prototype.stylize = function (toast) {
-        console.dir(this);
-        console.dir(toast);
         var foundPos = Message.Util.find(Message.stylePresets, this._type);
         /*Make all copying loop instead of manual in next ver*/
         /*Todo: Make default in else block*/
@@ -109,8 +107,7 @@ var Message = (function () {
     };
     Message.Util = {
         find: function (objArr, keyToFind) {
-            var foundPos = objArr.map(function (preset) { return preset.type; }).indexOf(keyToFind);
-            return foundPos;
+            return objArr.map(function (preset) { return preset.type; }).indexOf(keyToFind);
         },
         toDash: function (prop) {
             return prop.replace(/([A-Z])/g, function ($1) { return "-" + $1.toLowerCase(); });

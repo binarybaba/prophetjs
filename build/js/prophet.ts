@@ -51,8 +51,7 @@ interface IMessageOptions{
 class Message{
     static Util = {
         find : (objArr : Array<IStylePreset>, keyToFind : string) : number => {
-                var foundPos = objArr.map(function(preset){ return preset.type; }).indexOf(keyToFind);
-                return foundPos;
+                return objArr.map(function(preset){ return preset.type; }).indexOf(keyToFind);                
             },
         toDash: (prop : string): string => {
                 return prop.replace(/([A-Z])/g, function($1){return "-"+$1.toLowerCase();});
@@ -61,7 +60,6 @@ class Message{
     static Dbg = {
         stackTrace: (): void => console.dir(Message.Stack),
         presets: () : void => console.dir(Message.stylePresets)
-
     };
     static parent : HTMLElement = document.getElementById('prophet');
     static stylePresets : Array<IStylePreset> = [
@@ -143,8 +141,6 @@ class Message{
         return this;
     }
     stylize(toast : HTMLElement){
-        console.dir(this);
-        console.dir(toast);
         var foundPos = Message.Util.find(Message.stylePresets,this._type);
         /*Make all copying loop instead of manual in next ver*/
         /*Todo: Make default in else block*/
