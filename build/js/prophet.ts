@@ -7,8 +7,7 @@
 /**
  * Polyfill DATE.NOW
  * Production steps of ECMA-262, Edition 5, 15.4.4.19 */
- if (!Date.now) { Date.now = function now() { return new Date().getTime(); }; }
-
+if (!Date.now) { Date.now = function now() { return new Date().getTime(); }; }
 /**
  * Polyfill ARRAY MAP
  * Production steps of ECMA-262, Edition 5, 15.4.4.19
@@ -39,7 +38,6 @@ interface IStylePreset {
     backgroundColor : string;
     color : string
 }
-
 interface IMessageOptions{
     id? : number;
     text : string;
@@ -50,14 +48,15 @@ interface IMessageOptions{
 }
 
 
-
-
 class Message{
     static Util = {
         find : (objArr : Array<IStylePreset>, keyToFind : string) : number => {
                 var foundPos = objArr.map(function(preset){ return preset.type; }).indexOf(keyToFind);
                 return foundPos;
-            }
+            },
+        toDash: (prop : string): string => {
+                return prop.replace(/([A-Z])/g, function($1){return "-"+$1.toLowerCase();});
+        }
     };
     static Dbg = {
         stackTrace: (): void => console.dir(Message.Stack),
@@ -102,60 +101,59 @@ class Message{
         @param options.id the id of the message
         @param options.duration duration of the message
         @param options.class string of custom classes
-        @param options.onCl
-        ickCallback function to execute when clicked on notification
+        @param options.onClickCallback function to execute when clicked on notification
      @param cb callback to execute after the message is auto-removed (gets overridden if onClickCallback is specified)
     */
 
     constructor(options : IMessageOptions, cb : Function) {
-        /*initializations with defaults*/
-        var _this = this;
-        var cbFired : boolean = false;
         this._text = typeof(options) === "string" ? options : options.text;
         this._type = options.type ? options.type : "default";
         this._id = options.id ? options.id : Message.idGen();
         this._duration = +options.duration ? +options.duration : 4000;
         this._class = options.class ? " "+options.class : "";
-        /*Override cb if an onclick callback is present*/
         if(typeof(options.onClickCallback) === "function"){
             this.onClickCallback = options.onClickCallback;
             if(cb) cb = options.onClickCallback;
-        }
+        } /*Override cb if an onclick callback is present*/
         Message.Stack[Message.Stack.length] = this;
-
-
-        /*Creation*/
-        var notification = document.createElement('li');
-        [notification.className, notification.innerText] = ["message"+ this._class, this._text];
-        this.stylize(notification);
-        notification.addEventListener('click', function(){
-            notification.classList.remove('prophet-message-active');
-            Message.parent.removeChild(notification);
+        return this.init(cb);
+    }
+    init(cb : Function ): Message{
+        var _this = this;
+        var cbFired : boolean = false;
+        var toast = document.createElement('li');
+        [toast.className, toast.innerText] = ["message"+ this._class, this._text];
+        this.stylize(toast);
+        toast.addEventListener('click', function(){
+            toast.classList.remove('prophet-message-active');
+            Message.parent.removeChild(toast);
             if(_this.onClickCallback) _this.onClickCallback(_this._id);
             cbFired = true;
         });
-        Message.parent.appendChild(notification);
+        Message.parent.appendChild(toast);
         setTimeout(function(){
-            notification.classList.add('prophet-message-active');
+            toast.classList.add('prophet-message-active');
         },10);
         setTimeout(function(){
-            notification.classList.remove('prophet-message-active');
+            toast.classList.remove('prophet-message-active');
             if(!cbFired) if(cb) cb(_this._id);
-            Message.parent.removeChild(notification);
-             //catch when user manually clears the notification
+            Message.parent.removeChild(toast);
+            //catch when user manually clears the notification
         },this._duration);
-        return this; // for chaining
-    }
-    type(type : string): Message {
-        this._type = type;
-        console.dir(this);
-        /*TODO: add css of the notification*/
         return this;
     }
-    stylize(notification){
-
-
+    stylize(toast : HTMLElement){
+        console.dir(this);
+        console.dir(toast);
+        var foundPos = Message.Util.find(Message.stylePresets,this._type);
+        /*Make all copying loop instead of manual in next ver*/
+        /*Todo: Make default in else block*/
+        if (foundPos !== -1){
+            toast.style.backgroundColor = Message.stylePresets[foundPos].backgroundColor;
+            toast.style.color = Message.stylePresets[foundPos].color;
+        }
     }
+    
 }
 
 
