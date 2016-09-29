@@ -8,6 +8,7 @@
  * Polyfill DATE.NOW
  * Production steps of ECMA-262, Edition 5, 15.4.4.19 */
  if (!Date.now) { Date.now = function now() { return new Date().getTime(); }; }
+
 /**
  * Polyfill ARRAY MAP
  * Production steps of ECMA-262, Edition 5, 15.4.4.19
@@ -32,27 +33,28 @@ if (!Array.prototype.map) {
         return A;
     };
 }
-/*Todo: Implemenet for better type checking
-interface  IStylePreset {
+
+interface IStylePreset {
     type : string;
-    backgroundColour : string;
-    color: string;
+    backgroundColor : string;
+    color : string
 }
-interface IStylePresets extends Array<IStylePreset>{}
- */
 
-/* :::CURRENT FEATURES:::::::::::::::::::::::::
-* a. Override supported auto-generated ID 
-* b. 3 presets: error, success, default
-* c. Support for setting new presets along with color codes
-* d. A stack of all Messages delivered by prophet
-* e. support for new classes to override
-* f. support for a single callback function*/
+interface IMessageOptions{
+    id? : number;
+    text : string;
+    type?: string;
+    duration? :number; //defaults to 3000 milliseconds
+    class? : string;
+    onClickCallback?: Function;
+}
 
 
-class Message {
+
+
+class Message{
     static Util = {
-        find : (objArr, keyToFind : string) : number => {
+        find : (objArr : Array<IStylePreset>, keyToFind : string) : number => {
                 var foundPos = objArr.map(function(preset){ return preset.type; }).indexOf(keyToFind);
                 return foundPos;
             }
@@ -63,13 +65,13 @@ class Message {
 
     };
     static parent : HTMLElement = document.getElementById('prophet');
-    static stylePresets = [
+    static stylePresets : Array<IStylePreset> = [
         { type: "default", backgroundColor: "#37474f" , color: "#ECEFF1"},
         { type: "success", backgroundColor: "#37474f", color: "#ECEFF1" },
         { type: "error", backgroundColor: "#d32f2f", color: "#EEE"}
         ];
-    static config = {
-        types(newPresets) : void {
+    static config : Object = {
+        types(newPresets : IStylePreset | Array<IStylePreset>) : void {
             newPresets = [].concat(newPresets);
             for(var i = 0, len = newPresets.length, current; i< len; i++){
                 var pos = Message.Util.find(Message.stylePresets, newPresets[i].type)
@@ -80,8 +82,8 @@ class Message {
         }
     };
     static Stack : Array<Message> = [];
-    static idGen() {
-        return Date.now();
+    static idGen() : number{
+        return Date.now()%10000;
     }
     _id : number;
     _text : string;
@@ -105,7 +107,7 @@ class Message {
      @param cb callback to execute after the message is auto-removed (gets overridden if onClickCallback is specified)
     */
 
-    constructor(options, cb) {
+    constructor(options : IMessageOptions, cb : Function) {
         /*initializations with defaults*/
         var _this = this;
         var cbFired : boolean = false;
@@ -125,7 +127,6 @@ class Message {
         /*Creation*/
         var notification = document.createElement('li');
         [notification.className, notification.innerText] = ["message"+ this._class, this._text];
-
         this.stylize(notification);
         notification.addEventListener('click', function(){
             notification.classList.remove('prophet-message-active');
@@ -152,9 +153,9 @@ class Message {
         return this;
     }
     stylize(notification){
-        console.dir(notification);
+
+
     }
-
-
 }
+
 

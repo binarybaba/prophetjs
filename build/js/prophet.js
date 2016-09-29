@@ -38,21 +38,6 @@ if (!Array.prototype.map) {
         return A;
     };
 }
-/*Todo: Implemenet for better type checking
-interface  IStylePreset {
-    type : string;
-    backgroundColour : string;
-    color: string;
-}
-interface IStylePresets extends Array<IStylePreset>{}
- */
-/* :::CURRENT FEATURES:::::::::::::::::::::::::
-* a. Override supported auto-generated ID
-* b. 3 presets: error, success, default
-* c. Support for setting new presets along with color codes
-* d. A stack of all Messages delivered by prophet
-* e. support for new classes to override
-* f. support for a single callback function*/
 var Message = (function () {
     /*Todo: list of promise-like callbacks, buttons, icons, */
     /*Todo: Take position parameters and calculate placement via screen. and screen.height*/
@@ -110,7 +95,7 @@ var Message = (function () {
         var _a;
     }
     Message.idGen = function () {
-        return Date.now();
+        return Date.now() % 10000;
     };
     Message.prototype.type = function (type) {
         this._type = type;
@@ -119,7 +104,6 @@ var Message = (function () {
         return this;
     };
     Message.prototype.stylize = function (notification) {
-        console.dir(notification);
     };
     Message.Util = {
         find: function (objArr, keyToFind) {
