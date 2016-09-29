@@ -5,11 +5,10 @@ document.getElementById('trigger').addEventListener('click', function(){
         text: document.getElementById('txt').value,
         type: document.getElementById('type').value,
         duration: document.getElementById('duration').value,
-        class: "test  stuff2 stuff3",
+        class: "test stuff2 stuff3",
         onClickCallback: function(id){
             document.getElementById('res').innerHTML = "On Click!!"
         }
-
     }, function(id){
         document.getElementById('res').innerHTML = "On Away!"
     });
