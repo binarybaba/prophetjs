@@ -4,11 +4,14 @@
   "authors": [
     "Amin Mohamed Ajani <me@allrightamin.xyz>"
   ],
-  "description": "A highly customizable dependency free super lean library for displaying notifications on web pages",
+  "description": "A highly customizable, fast, lean, and dependency free, javascript library for displaying toast messages on web pages",
   "main": "",
   "keywords": [
     "notification",
     "notifications",
+    "toasts",
+    "toast messages",
+    "toast notification",
     "notify",
     "jQuery",
     "javascript",
@@ -18,7 +21,8 @@
     "error",
     "notify",
     "alerts",
-    "alertify"
+    "alertify",
+    "messages"
   ],
   "license": "MIT",
   "ignore": [
