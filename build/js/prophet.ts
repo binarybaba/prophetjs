@@ -40,7 +40,7 @@ interface IStylePreset {
 }
 interface IMessageOptions{
     id? : number;
-    text : string;
+    text: string;
     type?: string;
     duration? :number; //defaults to 3000 milliseconds
     class? : string;
