@@ -40,7 +40,8 @@ if (!Array.prototype.map) {
 }
 var Message = (function () {
     /*Todo: list of promise-like callbacks, buttons, icons, */
-    /*Todo: Take position parameters and calculate placement via screen. and screen.height*/
+    /*Todo: Take position parameters and calculate placement via screen. and screen.height
+    * Todo: take onclick callback in last parameter*/
     /*
     @param options Object of options
         @param options.text the text of the message
@@ -51,12 +52,13 @@ var Message = (function () {
         @param options.onClickCallback function to execute when clicked on notification
      @param cb callback to execute after the message is auto-removed (gets overridden if onClickCallback is specified)
     */
-    function Message(options, cb) {
-        this._text = typeof (options) === "string" ? options : options.text;
-        this._type = options.type ? options.type : "default";
+    function Message(text, options, cb) {
+        this._text = text ? text : "Awesome!";
+        this._type = options.type ? options.type.toLowerCase() : "default";
         this._id = options.id ? options.id : Message.idGen();
         this._duration = +options.duration ? +options.duration : 4000;
         this._class = options.class ? " " + options.class : "";
+        /*TODO: FIX BUG. onc is getting fired onclicked and onaway only of onc and cb is present*/
         if (typeof (options.onClickCallback) === "function") {
             this.onClickCallback = options.onClickCallback;
             if (cb)
@@ -119,9 +121,9 @@ var Message = (function () {
     };
     Message.parent = document.getElementById('prophet');
     Message.stylePresets = [
-        { type: "default", backgroundColor: "#37474f", color: "#ECEFF1" },
-        { type: "success", backgroundColor: "#37474f", color: "#ECEFF1" },
-        { type: "error", backgroundColor: "#d32f2f", color: "#EEE" }
+        { type: "default", backgroundColor: "#1c2e2d", color: "#FAFAFA" },
+        { type: "success", backgroundColor: "#4daf7c", color: "#FAFAFA" },
+        { type: "error", backgroundColor: "#D45A43", color: "#FAFAFA" }
     ];
     Message.config = {
         types: function (newPresets) {
