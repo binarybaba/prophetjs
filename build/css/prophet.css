@@ -1,9 +1,9 @@
-@import 'https://fonts.googleapis.com/css?family=Assistant';
+@import 'https://fonts.googleapis.com/css?family=Source+Sans+Pro';
 
 #prophet{
     position: fixed;
     /*display: inline-block;*/
-    font-family: 'Assistant', sans-serif;
+    font-family: 'Source Sans Pro', "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     margin-left:60%; /*Todo: Custom Control*/
 
 }
@@ -24,7 +24,7 @@
     font-family: 'Assistant', sans-serif;
     opacity:0;
     background-color: #323232;
-    color: #f4f4f4;
+    color: #fafafa;
     z-index: 99;
     margin-top: 20px;
     cursor: pointer;
@@ -33,6 +33,9 @@
     vertical-align: middle;
     max-width: 200px;
     text-align: center;
+    webkit-box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow:    1px 1px 1px 0px rgba(0, 0, 0, 0.3);
+    box-shadow:         1px 1px 1px 0px rgba(0, 0, 0, 0.3);
     -webkit-transition: all 0.4s ease;
     -moz-transition: all 0.4s ease;
     -o-transition: all 0.4s ease;
