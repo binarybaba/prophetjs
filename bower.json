@@ -22,7 +22,9 @@
     "notify",
     "alerts",
     "alertify",
-    "messages"
+    "messages",
+    "flash",
+    "flash messages"
   ],
   "license": "MIT",
   "ignore": [

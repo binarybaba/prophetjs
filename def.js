@@ -12,23 +12,27 @@ Message.config.types({
     backgroundColor:"indianred",
     color:"black"
 })
-
+var onc = function(id){
+    alert("click callback");
+}
+var ona = function(id){
+    alert("away callback");
+}
 document.getElementById('trigger').addEventListener('click', function(){
 
-    new Message({
+    new Message(document.getElementById('txt').value, {
         id: document.getElementById('id').value,
-        text: document.getElementById('txt').value,
         type: document.getElementById('type').value,
         duration: document.getElementById('duration').value,
         class: "test stuff2 stuff3",
-        onClickCallback: function(id){
-            document.getElementById('res').innerHTML = "On Click!!"
-        }
-    }, function(id){
-        document.getElementById('res').innerHTML = "On Away!"
-    });
+        onClickCallback : onc
+    }, ona);
     
 })
+
+/*onclick callback only works on click;*/
+/*onaway only works on away*/
+ 
 
 
 
