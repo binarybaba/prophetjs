@@ -38,46 +38,66 @@ if (!Array.prototype.map) {
         return A;
     };
 }
+/*
+ Todo: Make parent margin-left change on xs, sm, md, and lg ref: https://uxpin.s3.amazonaws.com/responsive_web_design_cheatsheet.pdf
+
+ Todo: Wrap it up in a function and call it on this.stylize() and window.resize*/
+Message.Util.rePosition();
+window.addEventListener('resize', Message.Util.rePosition);
 var Message = (function () {
-    /*Todo: icons, */
     /*Todo: Take position parameters and calculate placement via screen. and screen.height */
-    /*
-    @param options Object of options
-        @param options.text the text of the message
-        @param options.type the type of message (success, error, custom...)
-        @param options.id the id of the message
-        @param options.duration duration of the message
-        @param options.class string of custom classes
-     @param cb callback to execute after the message is auto-removed (gets overridden if onClickCallback is specified)
-    */
     function Message(text, options, cb) {
-        this._text = text ? text : "Awesome!";
+        this._id = Message.idGen();
+        this._text = text ? text : "Awesome! Got it.";
+        if (typeof (options) === "function")
+            this.cb = options;
+        else if (typeof (options) === "object" && !Array.isArray(options)) {
+            this._type = options.type || "default";
+            this._id = options.id || Message.idGen();
+            this._duration = options.duration || 4000;
+            this._class = options.class || "";
+        }
         this.cb = typeof (options) === "function" ? options : cb;
-        this._type = options.type ? options.type.toLowerCase() : "default";
+        /*this._type = options.type ? options.type.toLowerCase() : "default";
         this._id = options.id ? options.id : Message.idGen();
         this._duration = +options.duration ? +options.duration : 4000;
-        this._class = options.class ? " " + options.class : "";
+        this._class = options.class ? " "+options.class : "";*/
         Message.Stack[Message.Stack.length] = this;
-        return this.init();
+        this.init();
+        return this;
     }
     Message.idGen = function () {
         return Date.now() % 10000;
     };
+    /*Todo: make single clear function in future which clears a specific toast by taking an id as a param. if no id, clears all*/
+    Message.clearAll = function () {
+        var messages = document.querySelectorAll('ul#prophet > li');
+        for (var i = 0, len = messages.length; i < len; i++) {
+            messages[i].classList.remove('prophet-message-active');
+            Message.parent.removeChild(messages[i]);
+        }
+    };
     Message.prototype.init = function () {
         var _this = this;
-        var cbFired = false;
-        var toast = document.createElement('li');
-        _a = ["message" + this._class, this._text], toast.className = _a[0], toast.innerText = _a[1];
-        this.stylize(toast);
+        this.cbFired = false;
+        this.toast = document.createElement('li');
+        var toast = this.toast;
+        _a = ["message " + this._class, this._text], toast.className = _a[0], toast.innerText = _a[1];
+        this.stylize();
         toast.addEventListener('click', function () {
             toast.classList.remove('prophet-message-active');
             if (_this.cb) {
                 _this.cb(_this._id);
-                cbFired = true;
+                _this.cbFired = true;
             }
             Message.parent.removeChild(toast);
         });
-        Message.parent.appendChild(toast);
+        var _a;
+    };
+    Message.prototype.show = function () {
+        var _this = this;
+        var toast = this.toast;
+        Message.parent.appendChild(this.toast);
         setTimeout(function () {
             toast.classList.add('prophet-message-active');
         }, 10);
@@ -87,22 +107,22 @@ var Message = (function () {
                 Message.parent.removeChild(toast);
             }
             catch (e) { }
-            if (!cbFired)
+            if (!_this.cbFired)
                 if (_this.cb)
                     _this.cb(_this._id);
-            //catch when user manually clears the notification
         }, this._duration);
-        return this; //for future chaining
-        var _a;
+        return this;
     };
-    Message.prototype.stylize = function (toast) {
+    Message.prototype.stylize = function () {
         var foundPos = Message.Util.find(Message.stylePresets, this._type);
         /*Make all copying loop instead of manual in next ver*/
         /*Todo: Make default in else block*/
         if (foundPos !== -1) {
-            toast.style.backgroundColor = Message.stylePresets[foundPos].backgroundColor;
-            toast.style.color = Message.stylePresets[foundPos].color;
+            this.toast.style.backgroundColor = Message.stylePresets[foundPos].backgroundColor;
+            this.toast.style.color = Message.stylePresets[foundPos].color;
         }
+        /* this.toast.style.maxWidth = Message.Util.getSizes().width*0.4+'px';
+        console.info(Message.Util.getSizes().width);*/
     };
     Message.Util = {
         find: function (objArr, keyToFind) {
@@ -110,6 +130,24 @@ var Message = (function () {
         },
         toDash: function (prop) {
             return prop.replace(/([A-Z])/g, function ($1) { return "-" + $1.toLowerCase(); });
+        },
+        getSizes: function () {
+            var viewportwidth;
+            var viewportheight;
+            // the more standards compliant browsers (mozilla/netscape/opera/IE7) use window.innerWidth and window.innerHeight
+            if (typeof window.innerWidth != 'undefined') {
+                viewportwidth = window.innerWidth, viewportheight = window.innerHeight;
+            }
+            else if (typeof document.documentElement != 'undefined' && typeof document.documentElement.clientWidth != 'undefined' && document.documentElement.clientWidth != 0) {
+                viewportwidth = document.documentElement.clientWidth,
+                    viewportheight = document.documentElement.clientHeight;
+            }
+            else {
+                viewportwidth = document.getElementsByTagName('body')[0].clientWidth, viewportheight = document.getElementsByTagName('body')[0].clientHeight;
+            }
+            return { width: viewportwidth, height: viewportheight };
+        },
+        rePosition: function () {
         }
     };
     Message.Dbg = {
@@ -139,4 +177,5 @@ var Message = (function () {
     Message.Stack = [];
     return Message;
 }());
+Message.Util.rePosition();
 //# sourceMappingURL=prophet.js.map
