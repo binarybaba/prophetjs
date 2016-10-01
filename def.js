@@ -20,13 +20,8 @@ var ona = function(id){
 }
 document.getElementById('trigger').addEventListener('click', function(){
 
-    new Message(document.getElementById('txt').value, {
-        id: document.getElementById('id').value,
-        type: document.getElementById('type').value,
-        duration: document.getElementById('duration').value,
-        class: "test stuff2 stuff3",
-        onClickCallback : onc
-    }, ona);
+    var d = new Message(document.getElementById('txt').value, {duration:10000, type:document.getElementById('type').value});
+    console.log(d);
     
 })
 
