@@ -39,9 +39,8 @@ if (!Array.prototype.map) {
     };
 }
 var Message = (function () {
-    /*Todo: list of promise-like callbacks, buttons, icons, */
-    /*Todo: Take position parameters and calculate placement via screen. and screen.height
-    * Todo: take onclick callback in last parameter*/
+    /*Todo: icons, */
+    /*Todo: Take position parameters and calculate placement via screen. and screen.height */
     /*
     @param options Object of options
         @param options.text the text of the message
@@ -49,28 +48,22 @@ var Message = (function () {
         @param options.id the id of the message
         @param options.duration duration of the message
         @param options.class string of custom classes
-        @param options.onClickCallback function to execute when clicked on notification
      @param cb callback to execute after the message is auto-removed (gets overridden if onClickCallback is specified)
     */
     function Message(text, options, cb) {
         this._text = text ? text : "Awesome!";
+        this.cb = typeof (options) === "function" ? options : cb;
         this._type = options.type ? options.type.toLowerCase() : "default";
         this._id = options.id ? options.id : Message.idGen();
         this._duration = +options.duration ? +options.duration : 4000;
         this._class = options.class ? " " + options.class : "";
-        /*TODO: FIX BUG. onc is getting fired onclicked and onaway only of onc and cb is present*/
-        if (typeof (options.onClickCallback) === "function") {
-            this.onClickCallback = options.onClickCallback;
-            if (cb)
-                cb = options.onClickCallback;
-        } /*Override cb if an onclick callback is present*/
         Message.Stack[Message.Stack.length] = this;
-        return this.init(cb);
+        return this.init();
     }
     Message.idGen = function () {
         return Date.now() % 10000;
     };
-    Message.prototype.init = function (cb) {
+    Message.prototype.init = function () {
         var _this = this;
         var cbFired = false;
         var toast = document.createElement('li');
@@ -78,10 +71,11 @@ var Message = (function () {
         this.stylize(toast);
         toast.addEventListener('click', function () {
             toast.classList.remove('prophet-message-active');
+            if (_this.cb) {
+                _this.cb(_this._id);
+                cbFired = true;
+            }
             Message.parent.removeChild(toast);
-            if (_this.onClickCallback)
-                _this.onClickCallback(_this._id);
-            cbFired = true;
         });
         Message.parent.appendChild(toast);
         setTimeout(function () {
@@ -89,13 +83,16 @@ var Message = (function () {
         }, 10);
         setTimeout(function () {
             toast.classList.remove('prophet-message-active');
+            try {
+                Message.parent.removeChild(toast);
+            }
+            catch (e) { }
             if (!cbFired)
-                if (cb)
-                    cb(_this._id);
-            Message.parent.removeChild(toast);
+                if (_this.cb)
+                    _this.cb(_this._id);
             //catch when user manually clears the notification
         }, this._duration);
-        return this;
+        return this; //for future chaining
         var _a;
     };
     Message.prototype.stylize = function (toast) {
