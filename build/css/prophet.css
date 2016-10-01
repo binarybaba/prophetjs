@@ -4,7 +4,7 @@
     position: fixed;
     /*display: inline-block;*/
     font-family: 'Source Sans Pro', "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    margin-left:60%; /*Todo: Custom Control*/
+    margin-left:70%; /*Todo: Custom Control*/
 
 }
 
@@ -40,3 +40,4 @@
     -o-transition: all 0.4s ease;
     transition: all 0.4s ease;
 }
+
