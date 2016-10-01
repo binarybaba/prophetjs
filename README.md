@@ -13,7 +13,6 @@ This project adheres to [Semantic Versioning](http://semver.org/). This document
  - Support for setting new presets
  - Support for new classes to override per message
  - Support for a callback
- - Support for an on click callback which overrides general callback
 
 ### License
 
