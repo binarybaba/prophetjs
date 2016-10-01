@@ -1,11 +1,40 @@
 var calcSize = function(){
-        document.getElementById('screen-width').innerHTML = screen.width.toString();
-        document.getElementById('screen-height').innerHTML = screen.height.toString();
-        document.getElementById('screen-availWidth').innerHTML = screen.availWidth.toString();
-        document.getElementById('screen-availHeight').innerHTML = screen.availWidth.toString();
-}
-calcSize();
+    var viewportwidth;
+    var viewportheight;
 
+    // the more standards compliant browsers (mozilla/netscape/opera/IE7) use window.innerWidth and window.innerHeight
+
+    if (typeof window.innerWidth != 'undefined')
+    {
+        viewportwidth = window.innerWidth,
+            viewportheight = window.innerHeight
+    }
+
+// IE6 in standards compliant mode (i.e. with a valid doctype as the first line in the document)
+
+    else if (typeof document.documentElement != 'undefined'
+        && typeof document.documentElement.clientWidth != 'undefined' && document.documentElement.clientWidth != 0)
+    {
+        viewportwidth = document.documentElement.clientWidth,
+            viewportheight = document.documentElement.clientHeight
+    }
+
+    // older versions of IE
+
+    else
+    {
+        viewportwidth = document.getElementsByTagName('body')[0].clientWidth,
+            viewportheight = document.getElementsByTagName('body')[0].clientHeight
+    }
+        document.getElementById('screen-width').innerHTML = viewportwidth;
+        document.getElementById('screen-height').innerHTML = viewportheight;
+
+    document.getElementById('floater').style.marginLeft= (viewportwidth - 200) +'px';
+}
+
+
+window.addEventListener('resize', calcSize);
+document.addEventListener('DOMContentLoaded', calcSize)
 
 Message.config.types({
     type: "tip",
@@ -18,9 +47,15 @@ var onc = function(id){
 var ona = function(id){
     alert("away callback");
 }
-document.getElementById('trigger').addEventListener('click', function(){
+document.getElementById('clear').addEventListener('click', function(){
+    Message.clearAll();
+})
 
-    var d = new Message(document.getElementById('txt').value, {duration:10000, type:document.getElementById('type').value});
+document.getElementById('trigger').addEventListener('click', function(){
+    var d = new Message(document.getElementById('txt').value, {
+        duration : document.getElementById('duration').value,
+        type: document.getElementById('type').value
+    }).show();
     console.log(d);
     
 })
