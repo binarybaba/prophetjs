@@ -7,18 +7,8 @@
     margin-left:60%; /*Todo: Custom Control*/
 
 }
-/*Colour codes*/
-#prophet > li.message.success{
-    background-color: #43a047;
-    color:#eee;
-}
 
-#prophet > li.message.error{
-    background-color: #d32f2f;
-    color:#eee;
-}
-
-#prophet > li.message{
+#prophet > li{
     list-style-type: none;
     min-width: 100px;
     font-family: 'Assistant', sans-serif;
@@ -41,7 +31,7 @@
     -o-transition: all 0.4s ease;
     transition: all 0.4s ease;
 }
-#prophet > li.message.prophet-message-active{
+#prophet > .prophet-message-active{
 
     margin-top:10px;
     opacity: 1;
