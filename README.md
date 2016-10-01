@@ -13,6 +13,15 @@ This project adheres to [Semantic Versioning](http://semver.org/). This document
  - Support for setting new presets
  - Support for new classes to override per message
  - Support for a callback
+ - Support for chaining
+ - Manual show
+ - Support for the following styles of init:
+ --- new Message("Awesome!").show();
+ --- new Message("Awesome!", function(id){ ...do something }).show();
+ --- new Message("Awesome!", {duration:1000, ... }, function(id){ ... do something}).show();
+ ---
+
+
 
 ### License
 
