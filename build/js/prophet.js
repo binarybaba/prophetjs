@@ -9,10 +9,6 @@
 if (!Date.now) {
     Date.now = function now() { return new Date().getTime(); };
 }
-/**
- * Polyfill ARRAY MAP
- * Production steps of ECMA-262, Edition 5, 15.4.4.19
- * Reference: http://es5.github.io/#x15.4.4.19 */
 if (!Array.prototype.map) {
     Array.prototype.map = function (callback, thisArg) {
         var T, A, k;
@@ -38,24 +34,30 @@ if (!Array.prototype.map) {
         return A;
     };
 }
-/*
- Todo: Make parent margin-left change on xs, sm, md, and lg ref: https://uxpin.s3.amazonaws.com/responsive_web_design_cheatsheet.pdf
-
- Todo: Wrap it up in a function and call it on this.stylize() and window.resize*/
-Message.Util.rePosition();
-window.addEventListener('resize', Message.Util.rePosition);
 var Message = (function () {
     /*Todo: Take position parameters and calculate placement via screen. and screen.height */
     function Message(text, options, cb) {
         this._id = Message.idGen();
-        this._text = text ? text : "Awesome! Got it.";
-        if (typeof (options) === "function")
-            this.cb = options;
-        else if (typeof (options) === "object" && !Array.isArray(options)) {
-            this._type = options.type || "default";
-            this._id = options.id || Message.idGen();
-            this._duration = options.duration || 4000;
-            this._class = options.class || "";
+        this._text = "Awesome! Got it";
+        this._type = "default";
+        this._duration = 4000; //defaults to 4000 milliseconds
+        this._class = "";
+        Message.parent.style.marginLeft = Message.Util.getSizes().width * 0.5 + 'px';
+        this._text = text || "Awesome!";
+        console.dir(this);
+        this._type = "default";
+        this._duration = 4000; //defaults to 4000 milliseconds
+        this._class = " ";
+        if (options) {
+            this.cb = cb;
+            if (typeof (options) === "function")
+                this.cb = options;
+            else if (typeof (options) === "object" && !Array.isArray(options)) {
+                this._type = options.type || this._type;
+                this._id = options.id || this._id;
+                this._duration = options.duration || this._duration;
+                this._class = options.class || this._class;
+            }
         }
         this.cb = typeof (options) === "function" ? options : cb;
         /*this._type = options.type ? options.type.toLowerCase() : "default";
@@ -148,6 +150,39 @@ var Message = (function () {
             return { width: viewportwidth, height: viewportheight };
         },
         rePosition: function () {
+            var _a = Message.Util.getSizes(), width = _a.width, height = _a.height;
+            var p = Message.parent;
+            /*Todo: Refactor code and make appropriate resolution*/
+            if (width > height) {
+                /*portrate mode*/
+                if (width < 240)
+                    p.style.marginLeft = "10px";
+                else if (width > 240 && width > 320) {
+                    p.style.marginLeft = "30%";
+                    console.log(p.style.marginLeft);
+                }
+                else if (width > 320 && width < 480) {
+                    p.style.marginLeft = "35%";
+                    console.log(p.style.marginLeft);
+                }
+                else if (width > 480 && width < 600) {
+                    p.style.marginLeft = "50%";
+                    console.log(p.style.marginLeft);
+                }
+                else if (width > 600 && width < 720) {
+                    p.style.marginLeft = "80%";
+                    console.log(p.style.marginLeft);
+                }
+                else if (width > 720 && width < 1024) {
+                    p.style.marginLeft = "70%";
+                    console.log(p.style.marginLeft);
+                }
+                else {
+                    p.style.marginLeft = "75%";
+                    console.log(p.style.marginLeft);
+                }
+            }
+            console.info(p); /*Todo: fix bug:No Message.parent on first run*/
         }
     };
     Message.Dbg = {
@@ -177,5 +212,6 @@ var Message = (function () {
     Message.Stack = [];
     return Message;
 }());
+window.addEventListener('resize', Message.Util.rePosition);
 Message.Util.rePosition();
 //# sourceMappingURL=prophet.js.map
