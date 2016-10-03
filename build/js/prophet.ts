@@ -1,8 +1,10 @@
-/* @preserve
- * TERMS OF USE - PROPHETJS
- * Open source under the MIT License.
- * Copyright 2016 Amin Mohamed Ajani All rights reserved.
+/*!
+ * Prophetjs v1.0.0
+ * Copyright 2016 Amin Mohamed Ajani (http://allrightamin.xyz, http://twitter.com/AminSpeaks)
+ * Open source under the MIT License ()
+ * All rights reserved.
  */
+
 
 /**
  * Polyfill DATE.NOW
@@ -29,13 +31,6 @@ if (!Array.prototype.map) {
     };
 }
 
-/*
- Todo: Make parent margin-left change on xs, sm, md, and lg ref: https://uxpin.s3.amazonaws.com/responsive_web_design_cheatsheet.pdf
-
- Todo: Wrap it up in a function and call it on this.stylize() and window.resize*/
-
-/*Message.Util.rePosition();*/
-
 interface IStylePreset {
     type : string;
     backgroundColor : string;
@@ -46,7 +41,7 @@ interface IMessageOptions{
     type?: string;
     duration? :number; //defaults to 4000 milliseconds
     class? : string;
-    position?: string; ///*TODO: left,right,center: */
+    position?: string; ///*NEXTVER: left,right,center?: */
 
 }
 
@@ -76,6 +71,7 @@ class Message{
         },
         rePosition: () :void =>{
             var width = Message.Util.getSizes().width;
+            /*NEXTVER: portrait and landscape modes*/
             var height = Message.Util.getSizes().height;
             var p = Message.parent;
             console.log("width",width, "Parent: ",p);
@@ -114,7 +110,7 @@ class Message{
     static idGen() : number{
         return Date.now()%10000;
     }
-    /*Todo: make single clear function in future which clears a specific toast by taking an id as a param. if no id, clears all*/
+    /*NEXTVER: make single clear function in future which clears a specific toast by taking an id as a param. if no id, clears all*/
     static clearAll() : void {
         var messages = document.querySelectorAll('ul.prophet > li');
         for(var i = 0, len = messages.length; i< len; i++){
@@ -122,20 +118,21 @@ class Message{
             Message.parent.removeChild(messages[i]);
         }
     }
-    _id : number = Message.idGen();
-    _text : string = "Awesome! Got it";
-    _type: string = "default";
-    _duration :number = 4000; //defaults to 4000 milliseconds
-    _class : string = "";
+
+    _id : number;
+    _text : string;
+    _type: string;
+    _duration :number;
+    _class : string;
     cbFired:boolean;
     toast:HTMLElement;
     cb: Function;
-    callStack : [Function]; //promises maybe?
-    /*Todo: Take position parameters and calculate placement via screen. and screen.height */
+    callStack : [Function]; //NEXTVER: promises maybe?
 
     constructor(text: string, options : IMessageOptions, cb : Function) {
-        /*Message.parent.style.marginLeft = Message.Util.getSizes().width*0.5+'px';*/
+        //--- Default values ---
         this._text = text || "Awesome!";
+        this._id = Message.idGen();
         console.dir(this);
         this._type ="default";
         this._duration = 4000; //defaults to 4000 milliseconds
@@ -152,10 +149,6 @@ class Message{
 
         }
         this.cb = typeof(options) === "function" ? options: cb;
-        /*this._type = options.type ? options.type.toLowerCase() : "default";
-        this._id = options.id ? options.id : Message.idGen();
-        this._duration = +options.duration ? +options.duration : 4000;
-        this._class = options.class ? " "+options.class : "";*/
         Message.Stack[Message.Stack.length] = this;
         this.init();
         return this;
@@ -201,7 +194,7 @@ class Message{
     }
     stylize(){
         var foundPos = Message.Util.find(Message.stylePresets,this._type);
-        /*Todo: Make all copying loop instead of manual in next ver*/
+        /*NEXTVER: Make all copying loop instead of manual in next ver*/
         if (foundPos !== -1){
             this.toast.style.backgroundColor = Message.stylePresets[foundPos].backgroundColor;
             this.toast.style.color = Message.stylePresets[foundPos].color;
@@ -209,6 +202,7 @@ class Message{
     }
 
 }
-window.addEventListener('resize', Message.Util.rePosition);
 Message.Util.rePosition();
+window.addEventListener('resize', Message.Util.rePosition);
+
 

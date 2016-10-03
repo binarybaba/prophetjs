@@ -1,12 +1,14 @@
 {
   "name": "prophetjs",
   "version": "1.0.0",
-  "description": "A very very lean dependency free library to display web notifications",
-  "main": "def.js",
-  "dependencies": {
+  "description": "A very lean dependency free javascript library to display toast messages on web pages",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-minify": "0.0.14",
+    "gulp-rename": "^1.2.2",
     "typescript": "^2.0.3"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,8 +23,14 @@
     "jquery",
     "notifications",
     "notify",
-    "user",
-    "snarl"
+    "snarl",
+    "snarl notification",
+    "snarl toasts",
+    "toast",
+    "toast notifications",
+    "toastr",
+    "toastr alerts",
+    "toast message"
   ],
   "author": "Amin Mohamed Ajani",
   "license": "MIT",
