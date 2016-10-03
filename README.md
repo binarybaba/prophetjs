@@ -1,4 +1,5 @@
 # prophetjs
+[![Build Status](https://travis-ci.org/binarybaba/prophetjs.svg?branch=master)](https://travis-ci.org/binarybaba/prophetjs)
 A very lean dependency free javascript library to display toast messages on web pages.
 This project adheres to [Semantic Versioning](http://semver.org/). Sometimes I do screw up though. Tests are yet to be run on browsers.
 
