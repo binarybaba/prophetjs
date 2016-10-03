@@ -82,7 +82,7 @@ The following are the keys that options takes
 	 - default: auto-generated
 	 - Type: number
  - `type`
- 	*Prophet has 3 presets types:* `success`, `error` *and* `default`. *You can also set more presets. Click here to see how.*
+ 	*Prophet has 3 presets types:* `success`, `error` *and* `default`. *You can also set more presets. Click [here](#custom-types) to see how.*
  	 - default: `"default"`
  	 - Type: string
  - `duration`
