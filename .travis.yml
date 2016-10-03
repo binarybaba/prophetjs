@@ -4,8 +4,3 @@ node_js:
   - "5"
   - "4"
   - "0.12"
-
-addons:
-  sauce_connect:
-    username: "binarybaba"
-    access_key: "d6e16838-8722-4998-85fc-f49cf57271fc"
