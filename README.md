@@ -89,6 +89,7 @@ The following are the keys that options takes
 	 - Type: number
  - `type`
  	*Prophet has 3 presets types:* `success`, `error` *and* `default`. *You can also set more presets. Click [here](#custom-types) to see how.*
+
  	![error](https://github.com/binarybaba/prophetjs/raw/master/img/message-error.gif)
  	 - default: `"default"`
  	 - Type: string
