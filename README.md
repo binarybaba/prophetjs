@@ -92,9 +92,10 @@ The following are the keys that options takes
          class : 'blue-background white-text thin-border'
      }).show();
  ```
-## Custom Types
 
+## Custom Types
 You can also add more types by providing the `background-color`, `color` and `type` for more uses. Please note, all the keys are mandatory.
+
 
 ```
 Message.config.types({
@@ -103,6 +104,7 @@ Message.config.types({
     color:"#313131"
 })
 ```
+
 Now you can use the type while invoking a new Message:
 
 ```
@@ -112,24 +114,6 @@ var ppap = new Message("Awesome! Pen Pineapple Apple Pen.", { type: 'tip'}, func
  ppap.show();
 ```
 
-
-
-### Unreleased Version
-#### Added
- - 3 preset types: default, error, success,
- - A stack of all Messages delivered by prophet
- - Support for setting new presets
- - Support for new classes to override per message
- - Support for a callback
- - Support for chaining
- - Manual show
- - Support for the following styles of init:
- --- new Message("Awesome!").show();
- --- new Message("Awesome!", function(id){ ...do something }).show();
- --- new Message("Awesome!", {duration:1000, ... }, function(id){ ... do something}).show();
- ---
-
-
-
 #### License
-Open source under the MIT License. All rights reserved.
+Open source under the [MIT License](https://github.com/binarybaba/prophetjs/blob/master/LICENSE).
+All rights reserved.
