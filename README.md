@@ -4,16 +4,29 @@ This project adheres to [Semantic Versioning](http://semver.org/). Sometimes I d
 
 #### Version 1.0.0
 
+#### Table of Contents
+ - [Installation](#installation)
+   - [Download](#get-the-files)
+   - [Install](#find-the-files)
+ - [Usage](#api)
+   - [Simplest Display](#simplest-display)
+   - [Callback](#callback)
+   - [Options](#options)
+   - [Custom Toast Types](#custom-types)
+ - [Contributing](#contributing)
+ - [License](#license)
+
+
 ## Installation
 
-### 1. Get the files:
+### Get the files:
 Choose any of the ways to get prophet:
 
 - clone from github `git clone https://github.com/binarybaba/prophetjs.git`
 - Install from npm `npm install prophetjs --save`
 - Install from bower `bower install prophetjs --save`
 
-### 2. Find the files
+### Find the files
 You'll see the files in the dist folder:
   ```
   dist
@@ -25,7 +38,7 @@ You'll see the files in the dist folder:
       ├── prophet.js.map
       └── prophet-min.js
  ```
-### 3.Wire it up
+### Wire it up
  Include the css and js files in your webpage:
 
  `<link rel="stylesheet" href="dist/css/prophet.min.css">`
@@ -113,6 +126,13 @@ var ppap = new Message("Awesome! Pen Pineapple Apple Pen.", { type: 'tip'}, func
  })
  ppap.show();
 ```
+
+### Contributing
+Thanks for taking out time for actually reading this block. You're awesome!
+Prophetjs is written in [TypeScript](http://www.typescriptlang.org). I started writing this library as my venture into getting to know TypeScript better so if you're thinking of
+contributing, please do install TypeScript as your dev dependencies. I'll be further updating this section to include guides on how to get
+your way around the compiler and how you can install it per your IDE/editor (and maybe put this whole section in a new file)
+
 
 #### License
 Open source under the [MIT License](https://github.com/binarybaba/prophetjs/blob/master/LICENSE).
