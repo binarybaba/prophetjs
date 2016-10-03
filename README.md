@@ -23,7 +23,6 @@ This project adheres to [Semantic Versioning](http://semver.org/). Sometimes I d
 Choose any of the ways to get prophet:
 
 - clone from github `git clone https://github.com/binarybaba/prophetjs.git`
-- Install from npm `npm install prophetjs --save`
 - Install from bower `bower install prophetjs --save`
 
 ### Find the files
