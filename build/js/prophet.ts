@@ -71,26 +71,21 @@ class Message{
             }
             // older versions of IE
             else{ viewportwidth = document.getElementsByTagName('body')[0].clientWidth, viewportheight = document.getElementsByTagName('body')[0].clientHeight }
-            return { width: viewportwidth, height:viewportheight }
+            return { width: viewportwidth , height:viewportheight}
 
         },
         rePosition: () :void =>{
-            var {width, height} = Message.Util.getSizes();
+            var width = Message.Util.getSizes().width;
+            var height = Message.Util.getSizes().height;
             var p = Message.parent;
-            /*Todo: Refactor code and make appropriate resolution*/
-            if(width> height){
-                /*portrate mode*/
-                if(width<240) p.style.marginLeft="10px"
-                else if (width>240 && width > 320) {p.style.marginLeft="30%"; console.log(p.style.marginLeft)}
-                else if (width>320 && width < 480) {p.style.marginLeft="35%"; console.log(p.style.marginLeft)}
-                else if (width>480 && width < 600) {p.style.marginLeft="50%"; console.log(p.style.marginLeft)}
-                else if (width>600 && width < 720) {p.style.marginLeft="80%"; console.log(p.style.marginLeft)}
-                else if (width>720 && width < 1024) {p.style.marginLeft="70%"; console.log(p.style.marginLeft)}
-                else {p.style.marginLeft="75%"; console.log(p.style.marginLeft);}
-            }
-            console.info(p); /*Todo: fix bug:No Message.parent on first run*/
-
-
+            console.log("width",width, "Parent: ",p);
+            if(width<240) p.style.marginLeft="10px";
+            else if (width>240 && width < 320) p.style.marginLeft=0.3*width+"px";
+            else if (width>320 && width < 480) p.style.marginLeft=0.35*width+"px";
+            else if (width>480 && width < 600) p.style.marginLeft=0.5*width+"px";
+            else if (width>600 && width < 720) p.style.marginLeft=0.6*width+"px";
+            else if (width>720 && width < 1024) p.style.marginLeft=0.7*width+"px";
+            else if(width > 1024) p.style.marginLeft=(0.75*width)+"px";
         }
 
     };
@@ -140,7 +135,7 @@ class Message{
 
 
     constructor(text: string, options : IMessageOptions, cb : Function) {
-        Message.parent.style.marginLeft = Message.Util.getSizes().width*0.5+'px';
+        /*Message.parent.style.marginLeft = Message.Util.getSizes().width*0.5+'px';*/
         this._text = text || "Awesome!";
         console.dir(this);
         this._type ="default";
@@ -173,13 +168,19 @@ class Message{
         var toast = this.toast;
         [toast.className, toast.innerText] = ["message "+ this._class, this._text];
         this.stylize();
+        console.info('before click');
+        console.dir(toast.style.marginLeft);
         toast.addEventListener('click', function(){
+            console.info('after click');
+            console.dir(toast.style.marginLeft);
             toast.classList.remove('prophet-message-active');
             if(_this.cb){
                 _this.cb(_this._id);
                 _this.cbFired = true;
             }
-            Message.parent.removeChild(toast);
+            setTimeout(function(){
+                Message.parent.removeChild(toast);
+            },50);
         });
 
     }
@@ -192,27 +193,23 @@ class Message{
         },10);
         setTimeout(function(){
             toast.classList.remove('prophet-message-active');
-            try {Message.parent.removeChild(toast);} catch (e){}
             if(!_this.cbFired) if(_this.cb) _this.cb(_this._id);
+            setTimeout(function(){
+                try {Message.parent.removeChild(toast);} catch (e){}
+            }, 30);
         },this._duration);
     return this;
     }
     stylize(){
         var foundPos = Message.Util.find(Message.stylePresets,this._type);
-        /*Make all copying loop instead of manual in next ver*/
-        /*Todo: Make default in else block*/
+        /*Todo: Make all copying loop instead of manual in next ver*/
         if (foundPos !== -1){
             this.toast.style.backgroundColor = Message.stylePresets[foundPos].backgroundColor;
             this.toast.style.color = Message.stylePresets[foundPos].color;
         }
-
-
-        /* this.toast.style.maxWidth = Message.Util.getSizes().width*0.4+'px';
-        console.info(Message.Util.getSizes().width);*/
     }
 
 }
 window.addEventListener('resize', Message.Util.rePosition);
-
 Message.Util.rePosition();
 
