@@ -93,7 +93,7 @@ class Message{
         stackTrace: (): void => console.dir(Message.Stack),
         presets: () : void => console.dir(Message.stylePresets)
     };
-    static parent : HTMLElement = document.getElementById('prophet');
+    static parent : HTMLElement = <HTMLElement>document.getElementsByClassName('prophet')[0];
     static stylePresets : Array<IStylePreset> = [
         { type: "default", backgroundColor: "#1c2e2d" , color: "#FAFAFA"},
         { type: "success", backgroundColor: "#4daf7c", color: "#FAFAFA" },
@@ -116,7 +116,7 @@ class Message{
     }
     /*Todo: make single clear function in future which clears a specific toast by taking an id as a param. if no id, clears all*/
     static clearAll() : void {
-        var messages = document.querySelectorAll('ul#prophet > li');
+        var messages = document.querySelectorAll('ul.prophet > li');
         for(var i = 0, len = messages.length; i< len; i++){
             messages[i].classList.remove('prophet-message-active');
             Message.parent.removeChild(messages[i]);
@@ -132,7 +132,6 @@ class Message{
     cb: Function;
     callStack : [Function]; //promises maybe?
     /*Todo: Take position parameters and calculate placement via screen. and screen.height */
-
 
     constructor(text: string, options : IMessageOptions, cb : Function) {
         /*Message.parent.style.marginLeft = Message.Util.getSizes().width*0.5+'px';*/
@@ -180,7 +179,7 @@ class Message{
             }
             setTimeout(function(){
                 Message.parent.removeChild(toast);
-            },50);
+            },60);
         });
 
     }

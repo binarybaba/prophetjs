@@ -73,7 +73,7 @@ var Message = (function () {
     };
     /*Todo: make single clear function in future which clears a specific toast by taking an id as a param. if no id, clears all*/
     Message.clearAll = function () {
-        var messages = document.querySelectorAll('ul#prophet > li');
+        var messages = document.querySelectorAll('ul.prophet > li');
         for (var i = 0, len = messages.length; i < len; i++) {
             messages[i].classList.remove('prophet-message-active');
             Message.parent.removeChild(messages[i]);
@@ -98,7 +98,7 @@ var Message = (function () {
             }
             setTimeout(function () {
                 Message.parent.removeChild(toast);
-            }, 50);
+            }, 60);
         });
         var _a;
     };
@@ -179,7 +179,7 @@ var Message = (function () {
         stackTrace: function () { return console.dir(Message.Stack); },
         presets: function () { return console.dir(Message.stylePresets); }
     };
-    Message.parent = document.getElementById('prophet');
+    Message.parent = document.getElementsByClassName('prophet')[0];
     Message.stylePresets = [
         { type: "default", backgroundColor: "#1c2e2d", color: "#FAFAFA" },
         { type: "success", backgroundColor: "#4daf7c", color: "#FAFAFA" },
