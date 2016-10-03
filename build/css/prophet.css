@@ -4,11 +4,14 @@
     position: fixed;
     /*display: inline-block;*/
     font-family: 'Source Sans Pro', "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    margin-left:70%; /*Todo: Custom Control*/
+    /*margin-left:70%; !*Todo: Custom Control*!*/
+    transition: margin 0.1s cubic-bezier(.07,.99,.93,.97);
 
 }
 
 #prophet > li{
+    margin-top:0px;
+    margin-bottom:0px;
     list-style-type: none;
     min-width: 100px;
     font-family: 'Assistant', sans-serif;
@@ -26,18 +29,19 @@
     webkit-box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.3);
     -moz-box-shadow:    1px 1px 1px 0px rgba(0, 0, 0, 0.3);
     box-shadow:         1px 1px 1px 0px rgba(0, 0, 0, 0.3);
-    -webkit-transition: all 0.4s ease;
-    -moz-transition: all 0.4s ease;
-    -o-transition: all 0.4s ease;
-    transition: all 0.4s ease;
+    -webkit-transition: all 0.4s cubic-bezier(.07,.99,.93,.97);
+    -moz-transition: all 0.2s cubic-bezier(.07,.99,.93,.97);
+    -o-transition: all 0.2s cubic-bezier(.07,.99,.93,.97);
+    transition: all 0.2s cubic-bezier(.07,.99,.93,.97);
 }
 #prophet > .prophet-message-active{
 
     margin-top:10px;
+    margin-bottom:0px;
     opacity: 1;
-    -webkit-transition: all 0.4s ease;
-    -moz-transition: all 0.4s ease;
-    -o-transition: all 0.4s ease;
-    transition: all 0.4s ease;
+    -webkit-transition: all 0.2s cubic-bezier(.07,.99,.93,.97);
+    -moz-transition: all 0.2s cubic-bezier(.07,.99,.93,.97);
+    -o-transition: all 0.2s cubic-bezier(.07,.99,.93,.97);
+    transition: all 0.2s cubic-bezier(.07,.99,.93,.97);
 }
 
