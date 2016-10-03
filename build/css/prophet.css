@@ -1,6 +1,6 @@
 @import 'https://fonts.googleapis.com/css?family=Source+Sans+Pro';
 
-#prophet{
+.prophet{
     position: fixed;
     /*display: inline-block;*/
     font-family: 'Source Sans Pro', "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -9,7 +9,7 @@
 
 }
 
-#prophet > li{
+.prophet > li{
     margin-top:0px;
     margin-bottom:0px;
     list-style-type: none;
@@ -34,14 +34,13 @@
     -o-transition: all 0.2s cubic-bezier(.07,.99,.93,.97);
     transition: all 0.2s cubic-bezier(.07,.99,.93,.97);
 }
-#prophet > .prophet-message-active{
+.prophet > .prophet-message-active{
 
     margin-top:10px;
     margin-bottom:0px;
     opacity: 1;
-    -webkit-transition: all 0.2s cubic-bezier(.07,.99,.93,.97);
-    -moz-transition: all 0.2s cubic-bezier(.07,.99,.93,.97);
-    -o-transition: all 0.2s cubic-bezier(.07,.99,.93,.97);
-    transition: all 0.2s cubic-bezier(.07,.99,.93,.97);
+    -webkit-transition: all 0.1s cubic-bezier(.07,.99,.93,.97);
+    -moz-transition: all 0.1s cubic-bezier(.07,.99,.93,.97);
+    -o-transition: all 0.1s cubic-bezier(.07,.99,.93,.97);
+    transition: all 0.1s cubic-bezier(.07,.99,.93,.97);
 }
-
