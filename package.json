@@ -9,9 +9,9 @@
     "gulp-rename": "^1.2.2",
     "typescript": "^2.0.3"
   },
-  "scripts": {
+  /*"scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  },*/
   "repository": {
     "type": "git",
     "url": "git+https://github.com/binarybaba/prophetjs.git"
