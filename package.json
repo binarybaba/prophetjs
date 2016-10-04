@@ -1,6 +1,6 @@
 {
   "name": "prophetjs",
-  "version": "1.0.0",
+  "version": "0.0.9",
   "description": "A very lean dependency free javascript library to display toast messages on web pages",
   "devDependencies": {
     "gulp": "^3.9.1",

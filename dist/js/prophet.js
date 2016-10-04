@@ -1,5 +1,5 @@
 /*!
- * Prophetjs v1.0.0
+ * Prophetjs v0.0.9
  * Copyright 2016 Amin Mohamed Ajani (http://allrightamin.xyz, http://twitter.com/AminSpeaks)
  * Open source under the MIT License ()
  * All rights reserved.

@@ -3,7 +3,7 @@
 A very lean dependency free javascript library to display toast messages on web pages.
 This project adheres to [Semantic Versioning](http://semver.org/). Sometimes I do screw up though. Tests are yet to be run on browsers.
 
-#### Version 1.0.0
+#### Version 0.0.9
 
 ![default](https://github.com/binarybaba/prophetjs/raw/master/img/message-click-cb.gif)
 
