@@ -160,11 +160,11 @@ class Message{
         var toast = this.toast;
         [toast.className, toast.innerText] = ["message "+ this._class, this._text];
         this.stylize();
-        console.info('before click');
-        console.dir(toast.style.marginLeft);
+        /*console.info('before click');
+        console.dir(toast.style.marginLeft);*/
         toast.addEventListener('click', function(){
-            console.info('after click');
-            console.dir(toast.style.marginLeft);
+            /*console.info('after click');*/
+            /*console.dir(toast.style.marginLeft);*/
             toast.classList.remove('prophet-message-active');
             if(_this.cb){
                 _this.cb(_this._id);

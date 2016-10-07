@@ -1,0 +1,98 @@
+<!doctype html>
+<!--[if lt IE 8]> <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <style>@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);.prophet{position:fixed;font-family:'Source Sans Pro',HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;transition:margin .1s cubic-bezier(.07,.99,.93,.97)}.prophet>li{margin-bottom:0;list-style-type:none;min-width:100px;font-family:Assistant,sans-serif;opacity:0;background-color:#323232;color:#fafafa;z-index:99;margin-top:20px;cursor:pointer;border-radius:2px;padding:20px;vertical-align:middle;max-width:200px;text-align:center;webkit-box-shadow:1px 1px 1px 0 rgba(0,0,0,.3);-moz-box-shadow:1px 1px 1px 0 rgba(0,0,0,.3);box-shadow:1px 1px 1px 0 rgba(0,0,0,.3);-webkit-transition:all .4s cubic-bezier(.07,.99,.93,.97);-moz-transition:all .2s cubic-bezier(.07,.99,.93,.97);-o-transition:all .2s cubic-bezier(.07,.99,.93,.97);transition:all .2s cubic-bezier(.07,.99,.93,.97)}.prophet>.prophet-message-active{margin-top:10px;margin-bottom:0;opacity:1;-webkit-transition:all .1s cubic-bezier(.07,.99,.93,.97);-moz-transition:all .1s cubic-bezier(.07,.99,.93,.97);-o-transition:all .1s cubic-bezier(.07,.99,.93,.97);transition:all .1s cubic-bezier(.07,.99,.93,.97)}</style>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+</head>
+
+<body style="font-family: arial">
+<ul class="prophet"></ul>
+
+<!--<ul class="test">
+    <li>
+        <div>dwdw</div>
+    </li>
+</ul>-->
+<span id="status" style="margin-right:100px; float:right"></span>
+<!--<div id="floater"style="position:fixed; background-color:white; margin-top:300px; border: 4px solid black">
+    <div>SCREEN WIDTH: <span id="screen-width">dwwd</span> px</div>
+    <div>SCREEN HEIGHT: <span id="screen-height">height</span> px</div>
+    <div>Floater margin-left: <span id="ml">height</span> px</div>
+    <div>Floater margin-right: <span id="mr">height</span> px</div>
+</div>-->
+
+<section>
+    <!--<div>
+        <label for="id">ID:</label>
+        <input id="id" type="text">
+    </div>-->
+    <div>
+        <label for="txt">Text:</label>
+        <input id="txt" type="text">
+    </div>
+
+    <div>
+        <label for="type">Type:</label>
+        <select name="type" id="type">
+            <option name="default" value="default">Default</option>
+            <option name="default" value="success">Success</option>
+            <option name="default" value="error">Error</option>
+            <option name="default" value="tip">Custom Tip</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="duration">Duration:</label>
+        <input id="duration" type="text">
+    </div>
+
+    <button id="trigger" style="position: fixed">Go Go Go!</button>
+    <button id="clear" style="position: fixed; margin-top:40px">Clear All</button>
+    <section>
+        <p>need to add meta tags meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+            meta content="utf-8" http-equiv="encoding"> on older versions of firefox</p>
+    </section>
+        <section>
+        <p>Firefox <=44 Doesnt add text
+            Firefox >=45 Works!
+        </p>
+        </section>
+<section>
+    Edge 13 Works
+
+    IE 11 works
+    IE 10 works
+    ie < 9 DOESNT WORK
+</section>
+<p>        sAFARI 6 doesn't understend first margin
+    sAFARI 7 doesn't understend first margin
+    SAFARI 8 DOESNT UNDERSTAND FIRST MARGIBN
+    SAFARI 9 DESNT UDNERSTAND FIRST MARGIN
+
+    oPERA WORKS
+</p>
+
+
+
+</section>        <!--<span id="message" ></span>-->
+
+<script>Date.now||(Date.now=function(){return(new Date).getTime()}),Array.prototype.map||(Array.prototype.map=function(t,e){var i,n,s;if(null==this)throw new TypeError(" this is null or not defined");var o=Object(this),r=o.length>>>0;if("function"!=typeof t)throw new TypeError(t+" is not a function");for(arguments.length>1&&(i=e),n=new Array(r),s=0;s<r;){var c,a;s in o&&(c=o[s],a=t.call(i,c,s,o),n[s]=a),s++}return n});var Message=function(){function t(e,i,n){return this._text=e||"Awesome!",this._id=t.idGen(),console.dir(this),this._type="default",this._duration=4e3,this._class=" ",i&&(this.cb=n,"function"==typeof i?this.cb=i:"object"!=typeof i||Array.isArray(i)||(this._type=i.type||this._type,this._id=i.id||this._id,this._duration=i.duration||this._duration,this._class=i.class||this._class)),this.cb="function"==typeof i?i:n,t.Stack[t.Stack.length]=this,this.init(),this}return t.idGen=function(){return Date.now()%1e4},t.clearAll=function(){for(var e=document.querySelectorAll("ul.prophet > li"),i=0,n=e.length;i<n;i++)e[i].classList.remove("prophet-message-active"),t.parent.removeChild(e[i])},t.prototype.init=function(){var e=this;this.cbFired=!1,this.toast=document.createElement("li");var i=this.toast;n=["message "+this._class,this._text],i.className=n[0],i.innerText=n[1],this.stylize(),i.addEventListener("click",function(){i.classList.remove("prophet-message-active"),e.cb&&(e.cb(e._id),e.cbFired=!0),setTimeout(function(){t.parent.removeChild(i)},60)});var n},t.prototype.show=function(){var e=this,i=this.toast;return t.parent.appendChild(this.toast),setTimeout(function(){i.classList.add("prophet-message-active")},10),setTimeout(function(){i.classList.remove("prophet-message-active"),e.cbFired||e.cb&&e.cb(e._id),setTimeout(function(){try{t.parent.removeChild(i)}catch(t){}},30)},this._duration),this},t.prototype.stylize=function(){var e=t.Util.find(t.stylePresets,this._type);e!==-1&&(this.toast.style.backgroundColor=t.stylePresets[e].backgroundColor,this.toast.style.color=t.stylePresets[e].color)},t.Util={find:function(t,e){return t.map(function(t){return t.type}).indexOf(e)},toDash:function(t){return t.replace(/([A-Z])/g,function(t){return"-"+t.toLowerCase()})},getSizes:function(){var t,e;return"undefined"!=typeof window.innerWidth?(t=window.innerWidth,e=window.innerHeight):"undefined"!=typeof document.documentElement&&"undefined"!=typeof document.documentElement.clientWidth&&0!=document.documentElement.clientWidth?(t=document.documentElement.clientWidth,e=document.documentElement.clientHeight):(t=document.getElementsByTagName("body")[0].clientWidth,e=document.getElementsByTagName("body")[0].clientHeight),{width:t,height:e}},rePosition:function(){var e=t.Util.getSizes().width,i=(t.Util.getSizes().height,t.parent);console.log("width",e,"Parent: ",i),e<240?i.style.marginLeft="10px":e>240&&e<320?i.style.marginLeft=.3*e+"px":e>320&&e<480?i.style.marginLeft=.35*e+"px":e>480&&e<600?i.style.marginLeft=.5*e+"px":e>600&&e<720?i.style.marginLeft=.6*e+"px":e>720&&e<1024?i.style.marginLeft=.7*e+"px":e>1024&&(i.style.marginLeft=.75*e+"px")}},t.Dbg={stackTrace:function(){return console.dir(t.Stack)},presets:function(){return console.dir(t.stylePresets)}},t.parent=document.getElementsByClassName("prophet")[0],t.stylePresets=[{type:"default",backgroundColor:"#1c2e2d",color:"#FAFAFA"},{type:"success",backgroundColor:"#4daf7c",color:"#FAFAFA"},{type:"error",backgroundColor:"#D45A43",color:"#FAFAFA"}],t.config={types:function(e){e=[].concat(e);for(var i,n=0,s=e.length;n<s;n++){var o=t.Util.find(t.stylePresets,e[n].type);if(i=e[n],o!==-1)for(var r in i)t.stylePresets[o][r]=i[r];else t.stylePresets[t.stylePresets.length]=i}}},t.Stack=[],t}();Message.Util.rePosition(),window.addEventListener("resize",Message.Util.rePosition);</script>
+<script src="def.js"></script>
+<!--[if lt IE 7 ]>
+
+<![endif]-->
+
+</body>
+</html>
+
+
+
+
+
+
+
