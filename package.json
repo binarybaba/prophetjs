@@ -9,7 +9,7 @@
     "gulp-rename": "^1.2.2",
     "typescript": "^2.0.3"
   },
-   "repository": {
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/binarybaba/prophetjs.git"
   },
