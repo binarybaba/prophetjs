@@ -4,8 +4,9 @@
     position: fixed;
     /*display: inline-block;*/
     font-family: 'Source Sans Pro', "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    /*margin-left:70%; !*Todo: Custom Control*!*/
+    margin-left:70%; /*Fallback for FF<26 and safari which doesn't calculate the margin */
     transition: margin 0.1s cubic-bezier(.07,.99,.93,.97);
+
 
 }
 
@@ -44,3 +45,4 @@
     -o-transition: all 0.1s cubic-bezier(.07,.99,.93,.97);
     transition: all 0.1s cubic-bezier(.07,.99,.93,.97);
 }
+
