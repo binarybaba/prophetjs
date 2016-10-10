@@ -53,7 +53,7 @@
 
     <button id="trigger" style="position: fixed">Go Go Go!</button>
     <button id="clear" style="position: fixed; margin-top:40px">Clear All</button>
-    <section>
+    <section style="margin-top:20px">
         <p>need to add meta tags meta content="text/html;charset=utf-8" http-equiv="Content-Type">
             meta content="utf-8" http-equiv="encoding"> on older versions of firefox</p>
     </section>
@@ -62,7 +62,7 @@
             Firefox >=45 Works!
         </p>
         </section>
-<section>
+<section >
     Edge 13 Works
 
     IE 11 works
@@ -77,11 +77,35 @@
     oPERA WORKS
 </p>
 
+<div>
+    <br><br><br>
+    <h3>Message.Util.Reposition section</h3>
+    <table>
+        <tr>
+            <td>Parent</td>
+            <td><span id="parent"></span></td>
+        </tr>
+        <tr>
+            <td>Width:</td>
+            <td><span id="width"></span></td>
+        </tr>
+        <tr>
+            <td>Margin left before</td>
+            <td><span id="mL-before"></span></td>
+        </tr>
+        <tr>
+            <td>Margin Left After</td>
+            <td><span id="mL"></span></td>
+        </tr>
+    </table>
 
+
+</div>
 
 </section>        <!--<span id="message" ></span>-->
 
-<script>Date.now||(Date.now=function(){return(new Date).getTime()}),Array.prototype.map||(Array.prototype.map=function(t,e){var i,n,s;if(null==this)throw new TypeError(" this is null or not defined");var o=Object(this),r=o.length>>>0;if("function"!=typeof t)throw new TypeError(t+" is not a function");for(arguments.length>1&&(i=e),n=new Array(r),s=0;s<r;){var c,a;s in o&&(c=o[s],a=t.call(i,c,s,o),n[s]=a),s++}return n});var Message=function(){function t(e,i,n){return this._text=e||"Awesome!",this._id=t.idGen(),console.dir(this),this._type="default",this._duration=4e3,this._class=" ",i&&(this.cb=n,"function"==typeof i?this.cb=i:"object"!=typeof i||Array.isArray(i)||(this._type=i.type||this._type,this._id=i.id||this._id,this._duration=i.duration||this._duration,this._class=i.class||this._class)),this.cb="function"==typeof i?i:n,t.Stack[t.Stack.length]=this,this.init(),this}return t.idGen=function(){return Date.now()%1e4},t.clearAll=function(){for(var e=document.querySelectorAll("ul.prophet > li"),i=0,n=e.length;i<n;i++)e[i].classList.remove("prophet-message-active"),t.parent.removeChild(e[i])},t.prototype.init=function(){var e=this;this.cbFired=!1,this.toast=document.createElement("li");var i=this.toast;n=["message "+this._class,this._text],i.className=n[0],i.innerText=n[1],this.stylize(),i.addEventListener("click",function(){i.classList.remove("prophet-message-active"),e.cb&&(e.cb(e._id),e.cbFired=!0),setTimeout(function(){t.parent.removeChild(i)},60)});var n},t.prototype.show=function(){var e=this,i=this.toast;return t.parent.appendChild(this.toast),setTimeout(function(){i.classList.add("prophet-message-active")},10),setTimeout(function(){i.classList.remove("prophet-message-active"),e.cbFired||e.cb&&e.cb(e._id),setTimeout(function(){try{t.parent.removeChild(i)}catch(t){}},30)},this._duration),this},t.prototype.stylize=function(){var e=t.Util.find(t.stylePresets,this._type);e!==-1&&(this.toast.style.backgroundColor=t.stylePresets[e].backgroundColor,this.toast.style.color=t.stylePresets[e].color)},t.Util={find:function(t,e){return t.map(function(t){return t.type}).indexOf(e)},toDash:function(t){return t.replace(/([A-Z])/g,function(t){return"-"+t.toLowerCase()})},getSizes:function(){var t,e;return"undefined"!=typeof window.innerWidth?(t=window.innerWidth,e=window.innerHeight):"undefined"!=typeof document.documentElement&&"undefined"!=typeof document.documentElement.clientWidth&&0!=document.documentElement.clientWidth?(t=document.documentElement.clientWidth,e=document.documentElement.clientHeight):(t=document.getElementsByTagName("body")[0].clientWidth,e=document.getElementsByTagName("body")[0].clientHeight),{width:t,height:e}},rePosition:function(){var e=t.Util.getSizes().width,i=(t.Util.getSizes().height,t.parent);console.log("width",e,"Parent: ",i),e<240?i.style.marginLeft="10px":e>240&&e<320?i.style.marginLeft=.3*e+"px":e>320&&e<480?i.style.marginLeft=.35*e+"px":e>480&&e<600?i.style.marginLeft=.5*e+"px":e>600&&e<720?i.style.marginLeft=.6*e+"px":e>720&&e<1024?i.style.marginLeft=.7*e+"px":e>1024&&(i.style.marginLeft=.75*e+"px")}},t.Dbg={stackTrace:function(){return console.dir(t.Stack)},presets:function(){return console.dir(t.stylePresets)}},t.parent=document.getElementsByClassName("prophet")[0],t.stylePresets=[{type:"default",backgroundColor:"#1c2e2d",color:"#FAFAFA"},{type:"success",backgroundColor:"#4daf7c",color:"#FAFAFA"},{type:"error",backgroundColor:"#D45A43",color:"#FAFAFA"}],t.config={types:function(e){e=[].concat(e);for(var i,n=0,s=e.length;n<s;n++){var o=t.Util.find(t.stylePresets,e[n].type);if(i=e[n],o!==-1)for(var r in i)t.stylePresets[o][r]=i[r];else t.stylePresets[t.stylePresets.length]=i}}},t.Stack=[],t}();Message.Util.rePosition(),window.addEventListener("resize",Message.Util.rePosition);</script>
+<!--<script>Date.now||(Date.now=function(){return(new Date).getTime()}),Array.prototype.map||(Array.prototype.map=function(e,t){var n,o,i;if(null==this)throw new TypeError(" this is null or not defined");var s=Object(this),r=s.length>>>0;if("function"!=typeof e)throw new TypeError(e+" is not a function");for(arguments.length>1&&(n=t),o=new Array(r),i=0;i<r;){var c,a;i in s&&(c=s[i],a=e.call(n,c,i,s),o[i]=a),i++}return o}),Object.defineProperty&&Object.getOwnPropertyDescriptor&&Object.getOwnPropertyDescriptor(Element.prototype,"textContent")&&!Object.getOwnPropertyDescriptor(Element.prototype,"textContent").get&&!function(){var e=Object.getOwnPropertyDescriptor(Element.prototype,"innerText");Object.defineProperty(Element.prototype,"textContent",{get:function(){return e.get.call(this)},set:function(t){return e.set.call(this,t)}})}();var Message=function(){function e(t,n,o){return this._text=t||"Awesome!",this._id=e.idGen(),console.dir(this),this._type="default",this._duration=4e3,this._class=" ",n&&(this.cb=o,"function"==typeof n?this.cb=n:"object"!=typeof n||Array.isArray(n)||(this._type=n.type||this._type,this._id=n.id||this._id,this._duration=n.duration||this._duration,this._class=n.class||this._class)),this.cb="function"==typeof n?n:o,e.Stack[e.Stack.length]=this,this.init(),this}return e.idGen=function(){return Date.now()%1e4},e.clearAll=function(){for(var t=document.querySelectorAll("ul.prophet > li"),n=0,o=t.length;n<o;n++)t[n].classList.remove("prophet-message-active"),e.parent.removeChild(t[n])},e.prototype.init=function(){var t=this;this.cbFired=!1,this.toast=document.createElement("li");var n=this.toast;o=["message "+this._class,this._text],n.className=o[0],n.textContent=o[1],this.stylize(),n.addEventListener("click",function(){n.classList.remove("prophet-message-active"),t.cb&&(t.cb(t._id),t.cbFired=!0),setTimeout(function(){e.parent.removeChild(n)},60)});var o},e.prototype.show=function(){var t=this,n=this.toast;return e.parent.appendChild(this.toast),setTimeout(function(){n.classList.add("prophet-message-active")},10),setTimeout(function(){n.classList.remove("prophet-message-active"),t.cbFired||t.cb&&t.cb(t._id),setTimeout(function(){try{e.parent.removeChild(n)}catch(e){}},30)},this._duration),this},e.prototype.stylize=function(){var t=e.Util.find(e.stylePresets,this._type);t!==-1&&(this.toast.style.backgroundColor=e.stylePresets[t].backgroundColor,this.toast.style.color=e.stylePresets[t].color)},e.Util={find:function(e,t){return e.map(function(e){return e.type}).indexOf(t)},toDash:function(e){return e.replace(/([A-Z])/g,function(e){return"-"+e.toLowerCase()})},getSizes:function(){var e,t;return"undefined"!=typeof window.innerWidth?(e=window.innerWidth,t=window.innerHeight):"undefined"!=typeof document.documentElement&&"undefined"!=typeof document.documentElement.clientWidth&&0!=document.documentElement.clientWidth?(e=document.documentElement.clientWidth,t=document.documentElement.clientHeight):(e=document.getElementsByTagName("body")[0].clientWidth,t=document.getElementsByTagName("body")[0].clientHeight),{width:e,height:t}},rePosition:function(){console.info("Called reposition.. Getting width and height");var t=e.Util.getSizes().width;console.info("Got width of screen:",t);var n=e.Util.getSizes().height;console.info("Got Height of screen:",n),console.info("Getting parent.");var o=document.getElementsByClassName("prophet")[0];console.info("Got parent:",o.toString()),document.getElementById("parent").textContent=o.toString(),document.getElementById("width").textContent=t,console.info("Initial margin Left before is:",o.style.marginLeft),document.getElementById("mL-before").textContent=o.style.marginLeft,console.info("Recalculating the margins"),t<240?(console.info("Screen size is less than 240px"),o.style.marginLeft="10px"):t>240&&t<320?(console.info("Screen size is less than 320px and more than 240px"),o.style.marginLeft=.3*t+"px"):t>320&&t<480?(console.info("Screen size is less than 480px and more than 320px"),o.style.marginLeft=.35*t+"px"):t>480&&t<600?(console.info("Screen size is less than 600px and more than 480px"),o.style.marginLeft=.5*t+"px"):t>600&&t<720?(console.info("Screen size is less than 700px and more than 600px"),o.style.marginLeft=.6*t+"px"):t>720&&t<1024?(console.info("Screen size is less than 1024px and more than 720px"),o.style.marginLeft=.7*t+"px"):t>1024?(o.style.marginLeft=.75*t+"px",console.info("Screen Size is more than 1024px. Setting margin Left to",.75*t+"px")):console.info("Ifs didnt run"),document.getElementById("mL").textContent=o.style.marginLeft,console.info("Set Margin is ",o.style.marginLeft),console.info("End Reflow")}},e.Dbg={stackTrace:function(){return console.dir(e.Stack)},presets:function(){return console.dir(e.stylePresets)}},e.parent=document.getElementsByClassName("prophet")[0],e.stylePresets=[{type:"default",backgroundColor:"#1c2e2d",color:"#FAFAFA"},{type:"success",backgroundColor:"#4daf7c",color:"#FAFAFA"},{type:"error",backgroundColor:"#D45A43",color:"#FAFAFA"}],e.config={types:function(t){t=[].concat(t);for(var n,o=0,i=t.length;o<i;o++){var s=e.Util.find(e.stylePresets,t[o].type);if(n=t[o],s!==-1)for(var r in n)e.stylePresets[s][r]=n[r];else e.stylePresets[e.stylePresets.length]=n}}},e.Stack=[],e}();Message.Util.rePosition(),window.addEventListener("resize",Message.Util.rePosition);</script>-->
+<script src="build/js/prophet.js"></script>
 <script src="def.js"></script>
 <!--[if lt IE 7 ]>
 
