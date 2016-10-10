@@ -1,7 +1,7 @@
 /*!
  * Prophetjs v0.0.9
  * Copyright 2016 Amin Mohamed Ajani (http://allrightamin.xyz, http://twitter.com/AminSpeaks)
- * Open source under the MIT License ()
+ * Open source under the MIT License (https://github.com/binarybaba/prophetjs/blob/master/LICENSE)
  * All rights reserved.
  */
 
@@ -10,6 +10,10 @@
  * Polyfill DATE.NOW
  * Production steps of ECMA-262, Edition 5, 15.4.4.19 */
 if (!Date.now) { Date.now = function now() { return new Date().getTime(); }; }
+/**
+ * Polyfill ARRAY.MAP
+ * */
+
 if (!Array.prototype.map) {
    Array.prototype.map = function(callback, thisArg) {
         var T, A, k;
@@ -30,7 +34,7 @@ if (!Array.prototype.map) {
         return A;
     };
 }
-/*Polyfill TextContent for IE8*/
+/*Polyfill TEXTCONTENT for IE8*/
 if (Object.defineProperty
     && Object.getOwnPropertyDescriptor
     && Object.getOwnPropertyDescriptor(Element.prototype, "textContent")
