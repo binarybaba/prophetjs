@@ -45,3 +45,39 @@
     -o-transition: all 0.1s cubic-bezier(.07,.99,.93,.97);
     transition: all 0.1s cubic-bezier(.07,.99,.93,.97);
 }
+
+@media only screen and (min-width: 240px){
+    ul.prophet{
+        margin-left:10px;
+    }
+}
+@media only screen and (min-width: 240px) and (max-width: 320px){
+    ul.prophet{
+        margin-left:30%;
+    }
+}
+@media only screen and (min-width: 320px) and (max-width: 480px){
+    ul.prophet{
+        margin-left:35%;
+    }
+}
+@media only screen and (min-width: 480px) and (max-width: 600px){
+    ul.prophet{
+        margin-left:50%;
+    }
+}
+@media only screen and (min-width: 600px) and (max-width: 720px){
+    ul.prophet{
+        margin-left:60%;
+    }
+}
+@media only screen and (min-width: 720px) and (max-width: 1024px){
+    ul.prophet{
+        margin-left:70%;
+    }
+}
+@media only screen and (min-width: 1024px) {
+    ul.prophet{
+        margin-left:75%;
+    }
+}
