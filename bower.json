@@ -7,7 +7,7 @@
     "url":"git://github.com/binarybaba/prophetjs"
   },
   "authors": [
-    "Amin Mohamed Ajani <me@allrightamin.xyz>"
+    "Amin Mohamed Ajani <amin.ajani17@gmail.com>"
   ],
   "description": "A very lean dependency free javascript library to display toast messages on web pages.",
   "main": "dist/js/prophet.js",
