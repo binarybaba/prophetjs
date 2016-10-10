@@ -94,18 +94,14 @@ class Message{
             /*NEXTVER: portrait and landscape modes*/
             var height = Message.Util.getSizes().height;
             var p = <HTMLElement>document.getElementsByClassName('prophet')[0];
-            document.getElementById('parent').textContent=p.toString();
-            document.getElementById('width').textContent=width;
-            document.getElementById('mL-before').textContent=p.style.marginLeft;
-            /*console.log("width",width, "Parent: ",p);*/
-            if(width<240) {console.info("Screen size is less than 240px");p.style.marginLeft="10px";}
+            if(width<240) p.style.marginLeft="10px";
             else if (width>240 && width < 320)  p.style.marginLeft=0.3*width+"px";
             else if (width>320 && width < 480)  p.style.marginLeft=0.35*width+"px";
             else if (width>480 && width < 600)  p.style.marginLeft=0.5*width+"px";
             else if (width>600 && width < 720)  p.style.marginLeft=0.6*width+"px";
             else if (width>720 && width < 1024) p.style.marginLeft=0.7*width+"px";
             else if (width > 1024) p.style.marginLeft=(0.75*width)+"px";
-            document.getElementById('mL').textContent=p.style.marginLeft;
+            else if (width > 1024) p.style.marginLeft=(0.75*width)+"px";
 
         }
 
@@ -158,7 +154,6 @@ class Message{
         //--- Default values ---
         this._text = text || "Awesome!";
         this._id = Message.idGen();
-        console.dir(this);
         this._type ="default";
         this._duration = 4000; //defaults to 4000 milliseconds
         this._class = " ";
@@ -185,11 +180,7 @@ class Message{
         var toast = this.toast;
         [toast.className, toast.textContent] = ["message "+ this._class, this._text];
         this.stylize();
-        /*console.info('before click');
-        console.dir(toast.style.marginLeft);*/
         toast.addEventListener('click', function(){
-            /*console.info('after click');*/
-            /*console.dir(toast.style.marginLeft);*/
             toast.classList.remove('prophet-message-active');
             if(_this.cb){
                 _this.cb(_this._id);
@@ -228,9 +219,5 @@ class Message{
 
 }
 
-console.info("Queing up init");
-Message.Util.rePosition();
-
-window.addEventListener('resize', Message.Util.rePosition);
 
 

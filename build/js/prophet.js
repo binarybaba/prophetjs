@@ -57,7 +57,6 @@ var Message = (function () {
         //--- Default values ---
         this._text = text || "Awesome!";
         this._id = Message.idGen();
-        console.dir(this);
         this._type = "default";
         this._duration = 4000; //defaults to 4000 milliseconds
         this._class = " ";
@@ -95,11 +94,7 @@ var Message = (function () {
         var toast = this.toast;
         _a = ["message " + this._class, this._text], toast.className = _a[0], toast.textContent = _a[1];
         this.stylize();
-        /*console.info('before click');
-        console.dir(toast.style.marginLeft);*/
         toast.addEventListener('click', function () {
-            /*console.info('after click');*/
-            /*console.dir(toast.style.marginLeft);*/
             toast.classList.remove('prophet-message-active');
             if (_this.cb) {
                 _this.cb(_this._id);
@@ -168,14 +163,8 @@ var Message = (function () {
             /*NEXTVER: portrait and landscape modes*/
             var height = Message.Util.getSizes().height;
             var p = document.getElementsByClassName('prophet')[0];
-            document.getElementById('parent').textContent = p.toString();
-            document.getElementById('width').textContent = width;
-            document.getElementById('mL-before').textContent = p.style.marginLeft;
-            /*console.log("width",width, "Parent: ",p);*/
-            if (width < 240) {
-                console.info("Screen size is less than 240px");
+            if (width < 240)
                 p.style.marginLeft = "10px";
-            }
             else if (width > 240 && width < 320)
                 p.style.marginLeft = 0.3 * width + "px";
             else if (width > 320 && width < 480)
@@ -188,7 +177,8 @@ var Message = (function () {
                 p.style.marginLeft = 0.7 * width + "px";
             else if (width > 1024)
                 p.style.marginLeft = (0.75 * width) + "px";
-            document.getElementById('mL').textContent = p.style.marginLeft;
+            else if (width > 1024)
+                p.style.marginLeft = (0.75 * width) + "px";
         }
     };
     Message.Dbg = {
@@ -218,7 +208,4 @@ var Message = (function () {
     Message.Stack = [];
     return Message;
 }());
-console.info("Queing up init");
-Message.Util.rePosition();
-window.addEventListener('resize', Message.Util.rePosition);
 //# sourceMappingURL=prophet.js.map
