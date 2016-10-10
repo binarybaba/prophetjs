@@ -30,6 +30,25 @@ if (!Array.prototype.map) {
         return A;
     };
 }
+/*Polyfill TextContent for IE8*/
+if (Object.defineProperty
+    && Object.getOwnPropertyDescriptor
+    && Object.getOwnPropertyDescriptor(Element.prototype, "textContent")
+    && !Object.getOwnPropertyDescriptor(Element.prototype, "textContent").get) {
+    (function() {
+        var innerText = Object.getOwnPropertyDescriptor(Element.prototype, "innerText");
+        Object.defineProperty(Element.prototype, "textContent",
+            {
+                get: function() {
+                    return innerText.get.call(this);
+                },
+                set: function(s) {
+                    return innerText.set.call(this, s);
+                }
+            }
+        );
+    })();
+}
 
 interface IStylePreset {
     type : string;
@@ -70,18 +89,24 @@ class Message{
 
         },
         rePosition: () :void =>{
+
             var width = Message.Util.getSizes().width;
             /*NEXTVER: portrait and landscape modes*/
             var height = Message.Util.getSizes().height;
-            var p = Message.parent;
-            console.log("width",width, "Parent: ",p);
-            if(width<240) p.style.marginLeft="10px";
-            else if (width>240 && width < 320) p.style.marginLeft=0.3*width+"px";
-            else if (width>320 && width < 480) p.style.marginLeft=0.35*width+"px";
-            else if (width>480 && width < 600) p.style.marginLeft=0.5*width+"px";
-            else if (width>600 && width < 720) p.style.marginLeft=0.6*width+"px";
+            var p = <HTMLElement>document.getElementsByClassName('prophet')[0];
+            document.getElementById('parent').textContent=p.toString();
+            document.getElementById('width').textContent=width;
+            document.getElementById('mL-before').textContent=p.style.marginLeft;
+            /*console.log("width",width, "Parent: ",p);*/
+            if(width<240) {console.info("Screen size is less than 240px");p.style.marginLeft="10px";}
+            else if (width>240 && width < 320)  p.style.marginLeft=0.3*width+"px";
+            else if (width>320 && width < 480)  p.style.marginLeft=0.35*width+"px";
+            else if (width>480 && width < 600)  p.style.marginLeft=0.5*width+"px";
+            else if (width>600 && width < 720)  p.style.marginLeft=0.6*width+"px";
             else if (width>720 && width < 1024) p.style.marginLeft=0.7*width+"px";
-            else if(width > 1024) p.style.marginLeft=(0.75*width)+"px";
+            else if (width > 1024) p.style.marginLeft=(0.75*width)+"px";
+            document.getElementById('mL').textContent=p.style.marginLeft;
+
         }
 
     };
@@ -158,7 +183,7 @@ class Message{
         this.cbFired = false;
         this.toast = document.createElement('li');
         var toast = this.toast;
-        [toast.className, toast.innerText] = ["message "+ this._class, this._text];
+        [toast.className, toast.textContent] = ["message "+ this._class, this._text];
         this.stylize();
         /*console.info('before click');
         console.dir(toast.style.marginLeft);*/
@@ -202,7 +227,10 @@ class Message{
     }
 
 }
+
+console.info("Queing up init");
 Message.Util.rePosition();
+
 window.addEventListener('resize', Message.Util.rePosition);
 
 

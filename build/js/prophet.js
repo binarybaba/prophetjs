@@ -35,6 +35,23 @@ if (!Array.prototype.map) {
         return A;
     };
 }
+/*Polyfill TextContent for IE8*/
+if (Object.defineProperty
+    && Object.getOwnPropertyDescriptor
+    && Object.getOwnPropertyDescriptor(Element.prototype, "textContent")
+    && !Object.getOwnPropertyDescriptor(Element.prototype, "textContent").get) {
+    (function () {
+        var innerText = Object.getOwnPropertyDescriptor(Element.prototype, "innerText");
+        Object.defineProperty(Element.prototype, "textContent", {
+            get: function () {
+                return innerText.get.call(this);
+            },
+            set: function (s) {
+                return innerText.set.call(this, s);
+            }
+        });
+    })();
+}
 var Message = (function () {
     function Message(text, options, cb) {
         //--- Default values ---
@@ -76,7 +93,7 @@ var Message = (function () {
         this.cbFired = false;
         this.toast = document.createElement('li');
         var toast = this.toast;
-        _a = ["message " + this._class, this._text], toast.className = _a[0], toast.innerText = _a[1];
+        _a = ["message " + this._class, this._text], toast.className = _a[0], toast.textContent = _a[1];
         this.stylize();
         /*console.info('before click');
         console.dir(toast.style.marginLeft);*/
@@ -150,10 +167,15 @@ var Message = (function () {
             var width = Message.Util.getSizes().width;
             /*NEXTVER: portrait and landscape modes*/
             var height = Message.Util.getSizes().height;
-            var p = Message.parent;
-            console.log("width", width, "Parent: ", p);
-            if (width < 240)
+            var p = document.getElementsByClassName('prophet')[0];
+            document.getElementById('parent').textContent = p.toString();
+            document.getElementById('width').textContent = width;
+            document.getElementById('mL-before').textContent = p.style.marginLeft;
+            /*console.log("width",width, "Parent: ",p);*/
+            if (width < 240) {
+                console.info("Screen size is less than 240px");
                 p.style.marginLeft = "10px";
+            }
             else if (width > 240 && width < 320)
                 p.style.marginLeft = 0.3 * width + "px";
             else if (width > 320 && width < 480)
@@ -166,6 +188,7 @@ var Message = (function () {
                 p.style.marginLeft = 0.7 * width + "px";
             else if (width > 1024)
                 p.style.marginLeft = (0.75 * width) + "px";
+            document.getElementById('mL').textContent = p.style.marginLeft;
         }
     };
     Message.Dbg = {
@@ -195,6 +218,7 @@ var Message = (function () {
     Message.Stack = [];
     return Message;
 }());
+console.info("Queing up init");
 Message.Util.rePosition();
 window.addEventListener('resize', Message.Util.rePosition);
 //# sourceMappingURL=prophet.js.map

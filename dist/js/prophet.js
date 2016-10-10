@@ -35,6 +35,23 @@ if (!Array.prototype.map) {
         return A;
     };
 }
+/*Polyfill TextContent for IE8*/
+if (Object.defineProperty
+    && Object.getOwnPropertyDescriptor
+    && Object.getOwnPropertyDescriptor(Element.prototype, "textContent")
+    && !Object.getOwnPropertyDescriptor(Element.prototype, "textContent").get) {
+    (function () {
+        var innerText = Object.getOwnPropertyDescriptor(Element.prototype, "innerText");
+        Object.defineProperty(Element.prototype, "textContent", {
+            get: function () {
+                return innerText.get.call(this);
+            },
+            set: function (s) {
+                return innerText.set.call(this, s);
+            }
+        });
+    })();
+}
 var Message = (function () {
     function Message(text, options, cb) {
         //--- Default values ---
@@ -76,7 +93,7 @@ var Message = (function () {
         this.cbFired = false;
         this.toast = document.createElement('li');
         var toast = this.toast;
-        _a = ["message " + this._class, this._text], toast.className = _a[0], toast.innerText = _a[1];
+        _a = ["message " + this._class, this._text], toast.className = _a[0], toast.textContent = _a[1];
         this.stylize();
         /*console.info('before click');
         console.dir(toast.style.marginLeft);*/
@@ -147,25 +164,56 @@ var Message = (function () {
             return { width: viewportwidth, height: viewportheight };
         },
         rePosition: function () {
+            console.info("Called reposition.. Getting width and height");
             var width = Message.Util.getSizes().width;
+            console.info("Got width of screen:", width);
             /*NEXTVER: portrait and landscape modes*/
             var height = Message.Util.getSizes().height;
-            var p = Message.parent;
-            console.log("width", width, "Parent: ", p);
-            if (width < 240)
+            console.info("Got Height of screen:", height);
+            console.info("Getting parent.");
+            var p = document.getElementsByClassName('prophet')[0];
+            console.info("Got parent:", p.toString());
+            document.getElementById('parent').textContent = p.toString();
+            document.getElementById('width').textContent = width;
+            console.info("Initial margin Left before is:", p.style.marginLeft);
+            document.getElementById('mL-before').textContent = p.style.marginLeft;
+            /*console.log("width",width, "Parent: ",p);*/
+            console.info("Recalculating the margins for width", width, "with the type of ", typeof (width));
+            if (width < 240) {
+                console.info("Screen size is less than 240px");
                 p.style.marginLeft = "10px";
-            else if (width > 240 && width < 320)
+            }
+            else if (width > 240 && width < 320) {
+                console.info("Screen size is less than 320px and more than 240px");
                 p.style.marginLeft = 0.3 * width + "px";
-            else if (width > 320 && width < 480)
+            }
+            else if (width > 320 && width < 480) {
+                console.info("Screen size is less than 480px and more than 320px");
                 p.style.marginLeft = 0.35 * width + "px";
-            else if (width > 480 && width < 600)
+            }
+            else if (width > 480 && width < 600) {
+                console.info("Screen size is less than 600px and more than 480px");
                 p.style.marginLeft = 0.5 * width + "px";
-            else if (width > 600 && width < 720)
+            }
+            else if (width > 600 && width < 720) {
+                console.info("Screen size is less than 700px and more than 600px");
                 p.style.marginLeft = 0.6 * width + "px";
-            else if (width > 720 && width < 1024)
+            }
+            else if (width > 720 && width < 1024) {
+                console.info("Screen size is less than 1024px and more than 720px");
                 p.style.marginLeft = 0.7 * width + "px";
-            else if (width > 1024)
+            }
+            else if (width > 1024) {
                 p.style.marginLeft = (0.75 * width) + "px";
+                console.info("Screen Size is more than 1024px. Setting margin Left to", (0.75 * width) + "px");
+            }
+            else {
+                console.info("Ifs didnt run");
+            }
+            console.info(typeof (width));
+            document.getElementById('mL').textContent = p.style.marginLeft;
+            console.info("Set Margin is ", p.style.marginLeft);
+            console.info("End Reflow");
         }
     };
     Message.Dbg = {
@@ -195,6 +243,9 @@ var Message = (function () {
     Message.Stack = [];
     return Message;
 }());
-Message.Util.rePosition();
+setTimeout(function () {
+    console.info("Queing up init");
+    Message.Util.rePosition();
+}, 2000);
 window.addEventListener('resize', Message.Util.rePosition);
 //# sourceMappingURL=prophet.js.map
