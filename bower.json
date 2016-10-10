@@ -1,6 +1,6 @@
 {
   "name": "prophetjs",
-  "vesrion":"0.0.9",
+  "vesrion":"1.0.0",
   "homepage": "https://github.com/binarybaba/prophetjs",
   "repository":{
     "type":"git",
@@ -9,7 +9,7 @@
   "authors": [
     "Amin Mohamed Ajani <me@allrightamin.xyz>"
   ],
-  "description": "A highly customizable, fast, lean, and dependency free, javascript library for displaying toast messages on web pages",
+  "description": "A very lean dependency free javascript library to display toast messages on web pages.",
   "main": "dist/js/prophet.js",
   "keywords": [
     "notification",

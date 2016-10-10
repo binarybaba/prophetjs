@@ -1,9 +1,13 @@
-# prophetjs [![Build Status](https://travis-ci.org/binarybaba/prophetjs.svg?branch=master)](https://travis-ci.org/binarybaba/prophetjs)
+# prophetjs
 
 A very lean dependency free javascript library to display toast messages on web pages.
-This project adheres to [Semantic Versioning](http://semver.org/). Sometimes I do screw up though. Tests are yet to be run on browsers.
+This project adheres to [Semantic Versioning](http://semver.org/). Sometimes I do screw up though. Prophet currently supports:
+ - Chrome upto v26
+ - Firefox upto v20
+ - IE upto v10 (sorry)
+ - Safari upto v5
 
-#### Version 0.0.9
+#### Version 1.0.0
 
 ![default](https://github.com/binarybaba/prophetjs/raw/master/img/message-click-cb.gif)
 
