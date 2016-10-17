@@ -1,6 +1,7 @@
 # prophetjs
 [![NPM](https://nodei.co/npm/prophetjs.png?downloads=true&stars=true)](https://nodei.co/npm/prophetjs/)
 [![NPM](https://nodei.co/npm-dl/prophetjs.png?months=1&height=2)](https://nodei.co/npm/prophetjs/)
+
 A very lean dependency free javascript library to display toast messages on web pages.
 This project adheres to [Semantic Versioning](http://semver.org/). Sometimes I do screw up though. Prophet currently supports:
  - Chrome upto v26
