@@ -4,10 +4,10 @@
 
 A very lean dependency free javascript library to display toast messages on web pages.
 This project adheres to [Semantic Versioning](http://semver.org/). Sometimes I do screw up though. Prophet currently supports:
- - Chrome upto v26
- - Firefox upto v20
- - IE upto v10 (sorry)
- - Safari upto v5
+ - Chrome v26+
+ - Firefox v20+
+ - IE v10+ (sorry)
+ - Safari v5+
 
 #### Version 1.0.0
 
