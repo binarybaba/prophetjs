@@ -54,6 +54,8 @@ You'll see the files in the dist folder:
  `<link rel="stylesheet" href="dist/css/prophet.min.css">`
 
  `<script src="dist/js/prophet-min.js"></script>`
+ 
+ `<ul class="prophet"></ul>`
 
 
 # API
