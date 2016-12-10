@@ -3,7 +3,7 @@
 [![NPM](https://nodei.co/npm-dl/prophetjs.png?months=3)](https://nodei.co/npm/prophetjs/)
 
 A very lean dependency free javascript library to display toast messages on web pages.
-This project adheres to [Semantic Versioning](http://semver.org/). Sometimes I do screw up though. Prophet currently supports:
+This project adheres to [Semantic Versioning](http://semver.org/). Sometimes I do screw up though. For an AngularJS directive, checkout [ngProphet](https://github.com/binarybaba/ngProphet). Prophet currently supports:
  - Chrome v26+
  - Firefox v20+
  - IE v10+ (sorry)
