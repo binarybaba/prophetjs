@@ -57,6 +57,10 @@ You'll see the files in the dist folder:
  
  `<ul class="prophet"></ul>`
 
+ or
+
+ `import Message from 'prophetjs'`
+
 
 # API
 

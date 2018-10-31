@@ -223,5 +223,8 @@ class Message{
 
 }
 
-
+if (typeof module !== "undefined")
+    module["exports"] = Message;
+else
+    window["Message"] = Message;
 
